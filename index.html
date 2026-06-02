@@ -1,0 +1,1720 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AP3 Silent Possible - Agent Privacy Use Case Studio</title>
+  <meta name="description" content="A static AP3 click-through wireframe showing privacy-preserving personal-agent and enterprise-agent use cases.">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0c10;
+      --bg-2: #101218;
+      --panel: #151821;
+      --panel-2: #191d27;
+      --panel-3: #202432;
+      --ink: #f6f7fb;
+      --muted: #abb2c2;
+      --quiet: #7f8797;
+      --line: rgba(255, 255, 255, .13);
+      --line-strong: rgba(255, 255, 255, .24);
+      --cyan: #66d9ef;
+      --green: #81f0b2;
+      --amber: #ffd27a;
+      --rose: #ff7f99;
+      --violet: #b6a2ff;
+      --radius: 8px;
+      --shadow: 0 20px 70px rgba(0, 0, 0, .4);
+      --max: 1220px;
+      --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 84px;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font);
+      color: var(--ink);
+      background:
+        linear-gradient(120deg, rgba(102, 217, 239, .08), transparent 30%),
+        linear-gradient(230deg, rgba(255, 127, 153, .07), transparent 28%),
+        linear-gradient(0deg, rgba(129, 240, 178, .06), transparent 40%),
+        var(--bg);
+      line-height: 1.45;
+      letter-spacing: 0;
+    }
+
+    body:before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, .035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, .03) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, .75), transparent 80%);
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    .shell {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      border-bottom: 1px solid var(--line);
+      background: rgba(11, 12, 16, .86);
+      backdrop-filter: blur(16px);
+    }
+
+    .nav-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      font-weight: 800;
+    }
+
+    .mark {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: conic-gradient(from 30deg, var(--cyan), var(--green), var(--amber), var(--rose), var(--cyan));
+      color: #0b0c10;
+      box-shadow: 0 0 34px rgba(102, 217, 239, .24);
+    }
+
+    .mark span {
+      width: 24px;
+      height: 24px;
+      display: grid;
+      place-items: center;
+      border-radius: 6px;
+      background: #0b0c10;
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .brand-name {
+      display: grid;
+      gap: 1px;
+      min-width: 0;
+    }
+
+    .brand-name strong {
+      white-space: nowrap;
+    }
+
+    .brand-name small {
+      color: var(--quiet);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-links a,
+    .nav-action {
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      padding: 0 12px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      border: 1px solid transparent;
+    }
+
+    .nav-links a:hover {
+      color: var(--ink);
+      background: rgba(255, 255, 255, .06);
+    }
+
+    .nav-action {
+      color: var(--ink);
+      border-color: rgba(129, 240, 178, .38);
+      background: rgba(129, 240, 178, .1);
+      font-weight: 760;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero {
+      padding: 44px 0 36px;
+    }
+
+    .status-pill {
+      width: max-content;
+      max-width: 100%;
+      min-height: 34px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .045);
+      color: var(--muted);
+      padding: 0 10px;
+      font-size: 13px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 18px rgba(129, 240, 178, .85);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(420px, 1.1fr);
+      gap: 22px;
+      align-items: stretch;
+      margin-top: 22px;
+    }
+
+    h1 {
+      max-width: 820px;
+      margin: 18px 0 18px;
+      font-size: 64px;
+      line-height: .98;
+      letter-spacing: 0;
+    }
+
+    .hero-copy {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 19px;
+    }
+
+    .hero-copy strong {
+      color: var(--ink);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .btn {
+      min-height: 44px;
+      border-radius: 8px;
+      border: 1px solid var(--line-strong);
+      background: rgba(255, 255, 255, .06);
+      color: var(--ink);
+      padding: 0 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform .15s ease, border-color .15s ease, background .15s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(102, 217, 239, .55);
+      background: rgba(102, 217, 239, .1);
+    }
+
+    .btn.primary {
+      border-color: rgba(129, 240, 178, .48);
+      background: linear-gradient(135deg, rgba(102, 217, 239, .18), rgba(129, 240, 178, .16));
+      font-weight: 800;
+    }
+
+    .protocol-stage {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    .stage-chip {
+      min-height: 76px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .045);
+      padding: 10px;
+    }
+
+    .stage-chip span {
+      display: block;
+      color: var(--cyan);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .stage-chip strong {
+      display: block;
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    .stage-chip small {
+      color: var(--quiet);
+      font-size: 12px;
+    }
+
+    .simulator {
+      border: 1px solid var(--line-strong);
+      border-radius: 8px;
+      background: rgba(21, 24, 33, .78);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .sim-head {
+      min-height: 58px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px;
+      background: rgba(255, 255, 255, .04);
+    }
+
+    .sim-head strong {
+      font-size: 14px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .select-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    select {
+      min-height: 40px;
+      color: var(--ink);
+      background: #0e1016;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0 10px;
+      max-width: 290px;
+    }
+
+    .sim-body {
+      padding: 16px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .mesh {
+      position: relative;
+      min-height: 300px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, .04), rgba(255, 255, 255, .02)),
+        #0e1016;
+      overflow: hidden;
+    }
+
+    .mesh:before,
+    .mesh:after {
+      content: "";
+      position: absolute;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(102, 217, 239, .55), transparent);
+      left: 14%;
+      right: 14%;
+      top: 48%;
+      transform: rotate(-8deg);
+    }
+
+    .mesh:after {
+      transform: rotate(8deg);
+      background: linear-gradient(90deg, transparent, rgba(255, 210, 122, .5), transparent);
+      top: 55%;
+    }
+
+    .agent-node {
+      position: absolute;
+      width: 150px;
+      min-height: 76px;
+      border: 1px solid var(--line-strong);
+      border-radius: 8px;
+      background: rgba(25, 29, 39, .92);
+      padding: 10px;
+      z-index: 2;
+    }
+
+    .agent-node .label {
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    .agent-node strong {
+      display: block;
+      margin-top: 4px;
+      font-size: 14px;
+    }
+
+    .agent-node small {
+      color: var(--quiet);
+      display: block;
+      margin-top: 4px;
+      font-size: 12px;
+    }
+
+    .node-a {
+      left: 22px;
+      top: 26px;
+      border-color: rgba(102, 217, 239, .55);
+      background: rgba(13, 24, 34, .96);
+    }
+
+    .node-b {
+      left: 22px;
+      right: auto;
+      top: 116px;
+      transform: none;
+      border-color: rgba(129, 240, 178, .52);
+      background: rgba(14, 34, 26, .96);
+      box-shadow: 0 0 0 1px rgba(129, 240, 178, .08), 0 14px 40px rgba(0, 0, 0, .28);
+    }
+
+    .node-c {
+      left: 260px;
+      right: auto;
+      top: 116px;
+      bottom: auto;
+      transform: none;
+      border-color: rgba(255, 210, 122, .56);
+      background: rgba(37, 30, 17, .96);
+    }
+
+    .packet {
+      position: absolute;
+      z-index: 3;
+      width: 86px;
+      min-height: 36px;
+      border: 1px solid rgba(102, 217, 239, .58);
+      border-radius: 8px;
+      background: rgba(102, 217, 239, .11);
+      color: var(--cyan);
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+      font-weight: 800;
+      box-shadow: 0 0 26px rgba(102, 217, 239, .18);
+    }
+
+    .packet.intent {
+      left: 48%;
+      top: 72px;
+    }
+
+    .packet.compute {
+      right: 32%;
+      top: 146px;
+      border-color: rgba(129, 240, 178, .55);
+      background: rgba(129, 240, 178, .11);
+      color: var(--green);
+    }
+
+    .packet.result {
+      left: 58%;
+      bottom: 118px;
+      border-color: rgba(255, 210, 122, .55);
+      background: rgba(255, 210, 122, .12);
+      color: var(--amber);
+    }
+
+    .mesh.running .packet {
+      animation: pulse 1.1s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { transform: translateY(0); opacity: .76; }
+      to { transform: translateY(-5px); opacity: 1; }
+    }
+
+    .sim-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .04);
+      padding: 14px;
+    }
+
+    .panel h2,
+    .panel h3,
+    .panel h4 {
+      margin: 0;
+      letter-spacing: 0;
+    }
+
+    .panel h3 {
+      font-size: 14px;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .panel p {
+      color: var(--muted);
+      margin: 10px 0 0;
+      font-size: 14px;
+    }
+
+    .progress {
+      height: 10px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .04);
+      overflow: hidden;
+      margin-top: 12px;
+    }
+
+    .progress span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--cyan), var(--green), var(--amber));
+      transition: width .28s ease;
+    }
+
+    .code {
+      margin-top: 12px;
+      min-height: 154px;
+      border: 1px solid rgba(102, 217, 239, .2);
+      border-radius: 8px;
+      background: rgba(2, 4, 8, .7);
+      color: #d9f7ff;
+      padding: 12px;
+      overflow: auto;
+      font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      white-space: pre;
+    }
+
+    .metric-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .metric {
+      min-height: 74px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .035);
+      padding: 10px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 20px;
+    }
+
+    .metric span {
+      color: var(--quiet);
+      font-size: 12px;
+    }
+
+    .section {
+      padding: 38px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 22px;
+      margin-bottom: 18px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 36px;
+      line-height: 1.05;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 690px;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .filter {
+      min-height: 40px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .045);
+      color: var(--muted);
+      padding: 0 12px;
+      cursor: pointer;
+    }
+
+    .filter.active,
+    .filter:hover {
+      color: var(--ink);
+      border-color: rgba(102, 217, 239, .55);
+      background: rgba(102, 217, 239, .1);
+    }
+
+    .usecase-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .usecase-card {
+      min-height: 330px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(21, 24, 33, .72);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .usecase-card[hidden] {
+      display: none;
+    }
+
+    .usecase-top {
+      padding: 14px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .tag,
+    .rank {
+      min-height: 26px;
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0 8px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .rank {
+      color: var(--green);
+      border-color: rgba(129, 240, 178, .3);
+      background: rgba(129, 240, 178, .07);
+      font-weight: 800;
+    }
+
+    .usecase-body {
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .usecase-body h3 {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.12;
+    }
+
+    .usecase-body p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .bullets {
+      display: grid;
+      gap: 7px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      color: #dfe5ef;
+      font-size: 13px;
+    }
+
+    .bullets li {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .bullets li:before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--cyan);
+      margin-top: 7px;
+      flex: 0 0 auto;
+    }
+
+    .usecase-actions {
+      margin-top: auto;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .small-btn {
+      min-height: 36px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .05);
+      color: var(--ink);
+      padding: 0 10px;
+      cursor: pointer;
+    }
+
+    .small-btn:hover {
+      border-color: rgba(129, 240, 178, .5);
+    }
+
+    .architecture {
+      display: grid;
+      grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
+      gap: 14px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 10px;
+      counter-reset: step;
+    }
+
+    .timeline-step {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .04);
+      padding: 12px;
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 10px;
+      align-items: start;
+    }
+
+    .timeline-step:before {
+      counter-increment: step;
+      content: counter(step);
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: rgba(102, 217, 239, .12);
+      border: 1px solid rgba(102, 217, 239, .28);
+      color: var(--cyan);
+      font-weight: 900;
+    }
+
+    .timeline-step h3 {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .timeline-step p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .tab {
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .045);
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .tab.active {
+      color: var(--ink);
+      border-color: rgba(255, 210, 122, .5);
+      background: rgba(255, 210, 122, .09);
+    }
+
+    .tab-panel {
+      min-height: 390px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .04);
+      padding: 16px;
+    }
+
+    .tab-panel h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+    }
+
+    .tab-panel p {
+      color: var(--muted);
+      margin: 0 0 12px;
+    }
+
+    .schema-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .schema-item {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(0, 0, 0, .12);
+      padding: 12px;
+    }
+
+    .schema-item strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--amber);
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+
+    .schema-item span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .contrast {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .04);
+      padding: 16px;
+    }
+
+    .contrast.bad {
+      border-color: rgba(255, 127, 153, .28);
+    }
+
+    .contrast.good {
+      border-color: rgba(129, 240, 178, .32);
+    }
+
+    .contrast h3 {
+      margin: 0 0 10px;
+    }
+
+    .contrast p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .intake {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 16px;
+      align-items: start;
+      margin-bottom: 52px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      color: #dfe5ef;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    input,
+    textarea {
+      min-height: 44px;
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink);
+      background: rgba(0, 0, 0, .2);
+      padding: 10px;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 116px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: rgba(102, 217, 239, .62);
+      box-shadow: 0 0 0 3px rgba(102, 217, 239, .12);
+    }
+
+    .status {
+      min-height: 22px;
+      color: var(--green);
+      font-size: 13px;
+      margin-top: 10px;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      color: var(--quiet);
+      padding: 26px 0 38px;
+      font-size: 13px;
+    }
+
+    footer a {
+      color: var(--cyan);
+      text-underline-offset: 3px;
+    }
+
+    @media (max-width: 1060px) {
+      h1 {
+        font-size: 50px;
+      }
+
+      .hero-grid,
+      .architecture,
+      .intake {
+        grid-template-columns: 1fr;
+      }
+
+      .usecase-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .protocol-stage,
+      .metric-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .shell {
+        width: min(100% - 28px, var(--max));
+      }
+
+      h1 {
+        font-size: 38px;
+      }
+
+      .hero-copy {
+        font-size: 17px;
+      }
+
+      .hero-grid,
+      .sim-grid,
+      .usecase-grid,
+      .schema-grid,
+      .compare-grid,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .protocol-stage,
+      .metric-strip,
+      .tabs {
+        grid-template-columns: 1fr;
+      }
+
+      .sim-head,
+      .section-head {
+        display: block;
+      }
+
+      .select-wrap {
+        justify-content: flex-start;
+        margin-top: 10px;
+      }
+
+      .mesh {
+        min-height: 410px;
+      }
+
+      .agent-node {
+        width: calc(100% - 36px);
+        left: 18px;
+        right: auto;
+        transform: none;
+      }
+
+      .node-a {
+        top: 18px;
+      }
+
+      .node-b {
+        top: 132px;
+      }
+
+      .node-c {
+        top: 246px;
+        bottom: auto;
+      }
+
+      .packet.intent {
+        left: 32px;
+        top: 106px;
+      }
+
+      .packet.compute {
+        right: 32px;
+        top: 220px;
+      }
+
+      .packet.result {
+        left: 32px;
+        bottom: 24px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *:before,
+      *:after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav" aria-label="Primary">
+    <div class="shell nav-inner">
+      <a class="brand" href="#top" aria-label="AP3 Silent Possible home">
+        <span class="mark" aria-hidden="true"><span>AP3</span></span>
+        <span class="brand-name">
+          <strong>AP3 Silent Possible</strong>
+          <small>Agent privacy use-case studio</small>
+        </span>
+      </a>
+      <div class="nav-links">
+        <a href="#protocol">Protocol</a>
+        <a href="#use-cases">Use cases</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#evidence">Evidence</a>
+        <a class="nav-action" href="#pilot">Pilot brief</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top">
+    <section class="hero shell">
+      <span class="status-pill"><span class="status-dot"></span> Static click-through - no real AP3 computation</span>
+      <div class="hero-grid">
+        <div>
+          <h1>Design agent workflows where sensitive inputs never become shared context.</h1>
+          <p class="hero-copy"><strong>AP3</strong> is a research-preview protocol for privacy-preserving collaboration between autonomous agents. This wireframe turns the protocol into product surfaces for OpenClaw, Hermes, and enterprise agents.</p>
+          <div class="hero-actions">
+            <button class="btn primary" id="runHero" type="button">Run simulated AP3 session</button>
+            <a class="btn" href="#use-cases">Open use-case atlas</a>
+          </div>
+          <div class="protocol-stage" id="protocol">
+            <div class="stage-chip"><span>01</span><strong>Discover</strong><small>AgentCards, roles, commitments</small></div>
+            <div class="stage-chip"><span>02</span><strong>Authorize</strong><small>Signed intent and scope</small></div>
+            <div class="stage-chip"><span>03</span><strong>Compute</strong><small>PSI, threshold, scoring</small></div>
+            <div class="stage-chip"><span>04</span><strong>Reveal</strong><small>Minimal result only</small></div>
+            <div class="stage-chip"><span>05</span><strong>Evidence</strong><small>Signed receipt and audit trail</small></div>
+          </div>
+        </div>
+
+        <section class="simulator" aria-label="AP3 simulated session studio">
+          <div class="sim-head">
+            <strong>AP3 session simulator</strong>
+            <div class="select-wrap">
+              <select id="useCaseSelect" aria-label="Use case selector"></select>
+              <button class="btn primary" id="runSession" type="button">Run</button>
+            </div>
+          </div>
+          <div class="sim-body">
+            <div class="mesh" id="mesh">
+              <div class="agent-node node-a">
+                <span class="label">Initiator</span>
+                <strong id="nodeA">Host agent</strong>
+                <small id="nodeASub">opens private query</small>
+              </div>
+              <div class="agent-node node-b">
+                <span class="label">Receiver</span>
+                <strong id="nodeB">Personal agents</strong>
+                <small id="nodeBSub">hold private inputs</small>
+              </div>
+              <div class="agent-node node-c">
+                <span class="label">AP3 lane</span>
+                <strong id="nodeC">PSI adapter</strong>
+                <small id="nodeCSub">returns minimal output</small>
+              </div>
+              <div class="packet intent">intent</div>
+              <div class="packet compute">compute</div>
+              <div class="packet result">result</div>
+            </div>
+            <div class="sim-grid">
+              <div class="panel">
+                <h3 id="activeStage">Ready</h3>
+                <p id="stageCopy">Choose a use case and run the simulated protocol flow.</p>
+                <div class="progress"><span id="progressBar"></span></div>
+                <div class="metric-strip">
+                  <div class="metric"><strong id="metricOne">0</strong><span>private inputs exposed</span></div>
+                  <div class="metric"><strong id="metricTwo">1</strong><span>minimal output</span></div>
+                  <div class="metric"><strong id="metricThree">5</strong><span>audit checks</span></div>
+                  <div class="metric"><strong id="metricFour">0</strong><span>raw lists shared</span></div>
+                </div>
+              </div>
+              <div class="panel">
+                <h3>Current envelope</h3>
+                <pre class="code" id="codePanel"></pre>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="section shell">
+      <div class="section-head">
+        <h2>Why AP3 belongs in product design</h2>
+        <p>Traditional agent workflows often ask someone to share too much: a full list, a private preference, a raw profile, or a sensitive file. AP3 narrows that exchange to compatibility, intent, privacy-preserving computation, and verifiable output.</p>
+      </div>
+      <div class="compare-grid">
+        <div class="contrast bad">
+          <h3>Without AP3</h3>
+          <p>Agents coordinate by sending raw context, broad permissions, private lists, or sensitive documents into shared conversation state. The workflow works, but the privacy boundary collapses.</p>
+        </div>
+        <div class="contrast good">
+          <h3>With AP3</h3>
+          <p>Agents advertise roles and commitments, accept signed purpose-bound directives, run an approved private operation, and reveal only the result the user or counterparty agreed to receive.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell" id="use-cases">
+      <div class="section-head">
+        <h2>Use-case atlas</h2>
+        <p>The top five are recommended first builds. The remaining cases are included because they were discussed in the source material and help show AP3's wider product surface.</p>
+      </div>
+      <div class="filters" role="toolbar" aria-label="Use case filters">
+        <button class="filter active" data-filter="all" type="button">All</button>
+        <button class="filter" data-filter="top" type="button">Top five</button>
+        <button class="filter" data-filter="personal" type="button">Personal agents</button>
+        <button class="filter" data-filter="enterprise" type="button">Enterprise</button>
+        <button class="filter" data-filter="future" type="button">Future extension</button>
+      </div>
+      <div class="usecase-grid" id="useCaseGrid"></div>
+    </section>
+
+    <section class="section shell" id="architecture">
+      <div class="section-head">
+        <h2>OpenClaw / Hermes implementation view</h2>
+        <p>This is still a wireframe, but the component map follows the AP3 vocabulary: AgentCards, roles, commitments, directives, private operations, result directives, and evidence bundles.</p>
+      </div>
+      <div class="architecture">
+        <div class="timeline">
+          <div class="timeline-step">
+            <div>
+              <h3>Agent state stays local</h3>
+              <p>OpenClaw or Hermes stores household norms, preferences, care constraints, or enterprise records in local memory. The AP3 surface sees tags, commitments, or operation inputs only after owner policy approval.</p>
+            </div>
+          </div>
+          <div class="timeline-step">
+            <div>
+              <h3>AgentCard declares capability</h3>
+              <p>Each agent advertises compatible roles, supported operations, commitment shape, freshness, and public verification keys before private data enters a session.</p>
+            </div>
+          </div>
+          <div class="timeline-step">
+            <div>
+              <h3>PrivacyIntentDirective opens the session</h3>
+              <p>The directive binds purpose, participants, expiry, replay nonce, allowed output, and payload hash. The receiver checks it before touching the cryptographic payload.</p>
+            </div>
+          </div>
+          <div class="timeline-step">
+            <div>
+              <h3>Private operation returns minimal output</h3>
+              <p>The demo treats PSI as the first concrete primitive and represents threshold reveal, secure dot product, and private scoring as planned operation manifests.</p>
+            </div>
+          </div>
+          <div class="timeline-step">
+            <div>
+              <h3>Evidence becomes the product surface</h3>
+              <p>Users, auditors, and counterparties see signed directives, result receipts, compatibility checks, and policy decisions, not raw private inputs.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="tabs" role="tablist" aria-label="Architecture tabs">
+            <button class="tab active" data-tab="directive" type="button">Directive</button>
+            <button class="tab" data-tab="manifest" type="button">Manifest</button>
+            <button class="tab" data-tab="evidence" type="button">Evidence</button>
+            <button class="tab" data-tab="settlement" type="button">Settlement</button>
+          </div>
+          <div class="tab-panel" id="tabPanel"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell" id="evidence">
+      <div class="section-head">
+        <h2>Evidence bundle wireframe</h2>
+        <p>The AP3 result is intentionally small. The trust story lives in the evidence around that result.</p>
+      </div>
+      <div class="schema-grid">
+        <div class="schema-item"><strong>Signed intent</strong><span>Purpose, participants, expiry, operation, replay nonce, payload binding.</span></div>
+        <div class="schema-item"><strong>Compatibility check</strong><span>Roles complement, operation match, commitment shape, receiver public key.</span></div>
+        <div class="schema-item"><strong>Compute transcript</strong><span>Round IDs, payload hashes, session binding, receiver checks, timeout status.</span></div>
+        <div class="schema-item"><strong>Result directive</strong><span>Minimal output, integrity hash, result recipient, signature, metadata.</span></div>
+        <div class="schema-item"><strong>Policy log</strong><span>Allowed fields, forbidden actions, query budget, threshold, consent record.</span></div>
+        <div class="schema-item"><strong>Settlement hook</strong><span>Optional AP2 or x402 step after a verifiable result is available.</span></div>
+      </div>
+    </section>
+
+    <section class="section shell intake" id="pilot">
+      <div class="panel">
+        <h2>Recommended build order</h2>
+        <ul class="bullets" style="margin-top: 14px;">
+          <li>Ship Quiet Quorum as the first product demo.</li>
+          <li>Generalize it into Couplet for two-to-five-person decisions.</li>
+          <li>Use eldercare as the serious personal-agent commercial variant.</li>
+          <li>Add personal admin proxy to show delegated action boundaries.</li>
+          <li>Build confidential diligence as the enterprise AP3 track.</li>
+        </ul>
+        <p>This site stores the pilot brief locally in the browser. It does not send data anywhere.</p>
+      </div>
+      <div class="panel">
+        <h2>Pilot brief</h2>
+        <form id="pilotForm">
+          <div class="form-grid">
+            <div class="field">
+              <label for="owner">Owner</label>
+              <input id="owner" name="owner" autocomplete="name" placeholder="Product lead">
+            </div>
+            <div class="field">
+              <label for="track">Track</label>
+              <input id="track" name="track" placeholder="Personal agents">
+            </div>
+            <div class="field full">
+              <label for="brief">Use-case note</label>
+              <textarea id="brief" name="brief" placeholder="What should the AP3 demo prove?"></textarea>
+            </div>
+          </div>
+          <div class="hero-actions">
+            <button class="btn primary" type="submit">Save local brief</button>
+            <button class="btn" id="downloadBrief" type="button">Download JSON</button>
+          </div>
+          <div class="status" id="formStatus"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">
+      AP3 references: <a href="https://ap3-protocol.org/" target="_blank" rel="noopener">overview</a>,
+      <a href="https://ap3-protocol.org/roles/" target="_blank" rel="noopener">roles</a>,
+      <a href="https://ap3-protocol.org/use-cases/monetize-with-service-provider/" target="_blank" rel="noopener">service provider flow</a>,
+      <a href="https://playground.ap3-protocol.org/" target="_blank" rel="noopener">playground</a>.
+      This is a static wireframe and does not perform cryptographic computation.
+    </div>
+  </footer>
+
+  <script>
+    const useCases = [
+      {
+        id: "quiet-quorum",
+        title: "Quiet Quorum",
+        rank: "#1",
+        category: ["top", "personal"],
+        type: "Personal agents",
+        operation: "PSI / quorum",
+        initiator: "Host parent agent",
+        receiver: "Invited family agents",
+        adapter: "AP3 PSI lane",
+        summary: "A host checks shared household norms before a sleepover without seeing which family objected to which norm.",
+        bullets: ["Food, media, sleep, photo and supervision norms", "Shared ground card only", "Direct-disclosure lane for allergies"],
+        output: "Everyone agrees: peanut-free snacks, no firearms in home, PG max, lights out by 10:30.",
+        privateInputs: "household norms, parenting preferences, safety boundaries",
+        evidence: "six signed intents, one event scope, no full norm profile transmitted"
+      },
+      {
+        id: "couplet",
+        title: "Couplet",
+        rank: "#2",
+        category: ["top", "personal"],
+        type: "Personal agents",
+        operation: "PSI -> private ranking",
+        initiator: "Partner A agent",
+        receiver: "Partner B agent",
+        adapter: "AP3 preference lane",
+        summary: "Two to five people discover overlapping acceptable options without revealing full preference lists.",
+        bullets: ["Baby names, vacation destinations, house offers", "Simultaneous reveal", "Secure dot product as future ranking layer"],
+        output: "Overlap found: Maya, Nora, Jun. Private rankings remain hidden.",
+        privateInputs: "favorite names, ranked destinations, dealbreakers, weights",
+        evidence: "two signed intents, mirrored result receipts, full lists hidden"
+      },
+      {
+        id: "eldercare",
+        title: "Eldercare decision and cost split",
+        rank: "#3",
+        category: ["top", "personal"],
+        type: "Family agents",
+        operation: "PSI + private score",
+        initiator: "Care coordinator agent",
+        receiver: "Sibling agents",
+        adapter: "AP3 family decision lane",
+        summary: "Adult siblings choose a care option and budget split without exposing complete finances or priorities.",
+        bullets: ["Facility overlap", "Care preference scoring", "Private capacity bands"],
+        output: "Shared option: Sunrise North. Suggested split uses capacity bands, not raw balances.",
+        privateInputs: "facility preferences, budget bands, geography, care priorities",
+        evidence: "three signed intents, scoring manifest, settlement-ready result"
+      },
+      {
+        id: "personal-admin",
+        title: "Personal admin proxy",
+        rank: "#4",
+        category: ["top", "personal"],
+        type: "Delegated agent",
+        operation: "Scoped workflow",
+        initiator: "User assistant",
+        receiver: "Pharmacy or provider",
+        adapter: "AP3 policy lane",
+        summary: "A personal agent can check a prescription or benefits status with explicit fields and forbidden actions.",
+        bullets: ["High-risk workflow manifest", "Approved fields only", "Transcript and evidence bundle"],
+        output: "Prescription is ready after 4 PM. No SSN, payment card, or clinical decision used.",
+        privateInputs: "patient name, approved DOB, medication name, call goal",
+        evidence: "explicit consent, allowed-field log, forbidden-action checks"
+      },
+      {
+        id: "diligence",
+        title: "Confidential diligence",
+        rank: "#5",
+        category: ["top", "enterprise"],
+        type: "Enterprise agents",
+        operation: "PSI / private QA",
+        initiator: "Buyer diligence agent",
+        receiver: "Seller data-room agent",
+        adapter: "AP3 data-room lane",
+        summary: "A buyer runs approved analytics over target data without receiving raw customer, supplier or borrower files.",
+        bullets: ["Customer overlap", "Sanctions screening", "Restricted AI summaries"],
+        output: "Overlap count: 18,420 matched customers. Raw customer files remain undisclosed.",
+        privateInputs: "customer files, supplier risk data, loan records, contract exposure",
+        evidence: "function manifest, data-room policy, signed result receipt"
+      },
+      {
+        id: "fraud-psi",
+        title: "Enterprise fraud PSI",
+        rank: "P1",
+        category: ["enterprise"],
+        type: "Enterprise agents",
+        operation: "PSI",
+        initiator: "Fintech risk agent",
+        receiver: "Fraud-list provider",
+        adapter: "AP3 service-provider lane",
+        summary: "Two organizations check overlapping fraud signals without revealing full lists.",
+        bullets: ["Hashed customer lists", "Compliance approval", "Minimal intersection output"],
+        output: "Intersection count: 37. Matched IDs are withheld by policy.",
+        privateInputs: "fraud lists, customer identifiers, risk corpus",
+        evidence: "receiver commitment, intent validation, result directive"
+      },
+      {
+        id: "community",
+        title: "Neighborhood mutual aid",
+        rank: "Future",
+        category: ["future", "personal"],
+        type: "Community agents",
+        operation: "Threshold reveal",
+        initiator: "Coordinator agent",
+        receiver: "Household agents",
+        adapter: "AP3 threshold lane",
+        summary: "A safer Block Watch variant for tool sharing, contractor warnings and infrastructure reports.",
+        bullets: ["Minimum thresholds", "Short expiry", "No individual attribution"],
+        output: "Threshold met: four households can lend ladders this weekend.",
+        privateInputs: "household observations, tool availability, contractor experiences",
+        evidence: "threshold rule, query budget, attribution-suppression log"
+      },
+      {
+        id: "hermes-skill",
+        title: "Hermes silent-compute skill",
+        rank: "Platform",
+        category: ["enterprise", "future"],
+        type: "Agent platform",
+        operation: "Manifest registry",
+        initiator: "Hermes agent",
+        receiver: "Silent-compute provider",
+        adapter: "AP3 extension layer",
+        summary: "A reusable AP3 skill for session orchestration, identity, policy, mandates, attestations and evidence.",
+        bullets: ["Function manifests", "Enterprise gateway", "Audit evidence"],
+        output: "Registered function: customer_overlap_psi@0.3 with policy and attestation placeholders.",
+        privateInputs: "enterprise datasets, policy bindings, mandate metadata",
+        evidence: "manifest version, gateway log, simulated attestation"
+      }
+    ];
+
+    const steps = [
+      {
+        label: "Discovery",
+        copy: "Agents read AgentCards and AP3 extension metadata before any private input crosses the wire.",
+        progress: 20
+      },
+      {
+        label: "Compatibility",
+        copy: "Roles, supported operations and commitment shapes are checked against the selected use case.",
+        progress: 40
+      },
+      {
+        label: "PrivacyIntentDirective",
+        copy: "The initiator signs purpose, participants, expiry, replay nonce, operation and payload binding.",
+        progress: 60
+      },
+      {
+        label: "Private operation",
+        copy: "The simulated operation runs over committed private inputs and produces only the allowed result.",
+        progress: 82
+      },
+      {
+        label: "PrivacyResultDirective",
+        copy: "The result is signed, logged and attached to an evidence bundle for the user or auditor.",
+        progress: 100
+      }
+    ];
+
+    const tabContent = {
+      directive: {
+        title: "PrivacyIntentDirective",
+        body: "The directive is the product permission slip. It binds why the session exists, who participates, which operation is allowed, when it expires, and what output can be revealed.",
+        items: [
+          ["purpose", "event_norm_alignment or customer_overlap_check"],
+          ["participants", "initiator + receiver agent IDs"],
+          ["expiry", "short-lived timestamp and replay nonce"],
+          ["allowed_output", "shared norms, overlap count, threshold met"]
+        ]
+      },
+      manifest: {
+        title: "Function manifest registry",
+        body: "Product teams should treat every private operation as an approved manifest. PSI is the first real primitive. Threshold reveal, private scoring and secure dot product can be modeled as roadmap manifests.",
+        items: [
+          ["operation", "PSI, threshold reveal, private score"],
+          ["risk", "consumer social, health admin, enterprise regulated"],
+          ["inputs", "tags, hashes, commitments, approved fields"],
+          ["outputs", "minimal result with policy explanation"]
+        ]
+      },
+      evidence: {
+        title: "Evidence bundle",
+        body: "The proof surface is how the user trusts the demo. It shows what was authorized and checked without exposing the private data that made the result possible.",
+        items: [
+          ["signed_intent", "who authorized what"],
+          ["compatibility", "roles and operations matched"],
+          ["transcript", "round IDs and payload hashes"],
+          ["result_receipt", "minimal output and integrity hash"]
+        ]
+      },
+      settlement: {
+        title: "AP2 / x402 hook",
+        body: "AP3 owns privacy-preserving computation. Payment and value transfer can happen after AP3 produces a verifiable result.",
+        items: [
+          ["payment trigger", "result receipt verified"],
+          ["examples", "quorum check fee, data-room query, eldercare deposit"],
+          ["anti-spam", "small paid query budgets"],
+          ["status", "modeled here, not executed"]
+        ]
+      }
+    };
+
+    const useCaseSelect = document.getElementById("useCaseSelect");
+    const useCaseGrid = document.getElementById("useCaseGrid");
+    const mesh = document.getElementById("mesh");
+    const codePanel = document.getElementById("codePanel");
+    const activeStage = document.getElementById("activeStage");
+    const stageCopy = document.getElementById("stageCopy");
+    const progressBar = document.getElementById("progressBar");
+    const tabPanel = document.getElementById("tabPanel");
+    let activeUseCase = useCases[0];
+    let timer = null;
+    let savedBrief = null;
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;");
+    }
+
+    function envelopeFor(useCase, stepIndex) {
+      const step = steps[stepIndex] || steps[0];
+      return {
+        ap3_wireframe: true,
+        session_id: "demo_" + useCase.id.replaceAll("-", "_"),
+        stage: step.label,
+        operation: useCase.operation,
+        initiator: useCase.initiator,
+        receiver: useCase.receiver,
+        intent: {
+          purpose: useCase.id,
+          expiry: "15 minutes",
+          replay_nonce: "nonce_" + (stepIndex + 1),
+          allowed_output: useCase.output
+        },
+        private_inputs_stay_hidden: useCase.privateInputs,
+        visible_result: stepIndex >= 4 ? useCase.output : "pending",
+        evidence: stepIndex >= 4 ? useCase.evidence : "collecting checks"
+      };
+    }
+
+    function renderCode(stepIndex = 0) {
+      codePanel.textContent = JSON.stringify(envelopeFor(activeUseCase, stepIndex), null, 2);
+    }
+
+    function setUseCase(useCaseId) {
+      activeUseCase = useCases.find(item => item.id === useCaseId) || useCases[0];
+      useCaseSelect.value = activeUseCase.id;
+      document.getElementById("nodeA").textContent = activeUseCase.initiator;
+      document.getElementById("nodeASub").textContent = "role: ap3_initiator";
+      document.getElementById("nodeB").textContent = activeUseCase.receiver;
+      document.getElementById("nodeBSub").textContent = "private inputs: hidden";
+      document.getElementById("nodeC").textContent = activeUseCase.adapter;
+      document.getElementById("nodeCSub").textContent = activeUseCase.operation;
+      document.getElementById("metricOne").textContent = "0";
+      document.getElementById("metricTwo").textContent = "1";
+      document.getElementById("metricThree").textContent = activeUseCase.category.includes("enterprise") ? "7" : "5";
+      document.getElementById("metricFour").textContent = "0";
+      activeStage.textContent = activeUseCase.title;
+      stageCopy.textContent = activeUseCase.summary;
+      progressBar.style.width = "0%";
+      mesh.classList.remove("running");
+      renderCode(0);
+    }
+
+    function runSession() {
+      clearInterval(timer);
+      let index = 0;
+      mesh.classList.add("running");
+      function tick() {
+        const step = steps[index];
+        activeStage.textContent = step.label;
+        stageCopy.textContent = step.copy;
+        progressBar.style.width = step.progress + "%";
+        renderCode(index);
+        index += 1;
+        if (index >= steps.length) {
+          clearInterval(timer);
+          timer = null;
+          setTimeout(() => mesh.classList.remove("running"), 650);
+        }
+      }
+      tick();
+      timer = setInterval(tick, 950);
+    }
+
+    function renderSelect() {
+      for (const item of useCases) {
+        const option = document.createElement("option");
+        option.value = item.id;
+        option.textContent = item.title;
+        useCaseSelect.appendChild(option);
+      }
+    }
+
+    function renderUseCases(filter = "all") {
+      useCaseGrid.replaceChildren();
+      for (const item of useCases) {
+        const visible = filter === "all" || item.category.includes(filter);
+        const article = document.createElement("article");
+        article.className = "usecase-card";
+        article.hidden = !visible;
+        article.innerHTML = `
+          <div class="usecase-top">
+            <span class="rank">${escapeHtml(item.rank)}</span>
+            <span class="tag">${escapeHtml(item.type)}</span>
+          </div>
+          <div class="usecase-body">
+            <h3>${escapeHtml(item.title)}</h3>
+            <p>${escapeHtml(item.summary)}</p>
+            <ul class="bullets">
+              ${item.bullets.map(bullet => `<li>${escapeHtml(bullet)}</li>`).join("")}
+            </ul>
+            <p><strong>Visible output:</strong> ${escapeHtml(item.output)}</p>
+            <div class="usecase-actions">
+              <button class="small-btn" type="button" data-load="${escapeHtml(item.id)}">Load simulator</button>
+              <button class="small-btn" type="button" data-brief="${escapeHtml(item.title)}">Use in brief</button>
+            </div>
+          </div>
+        `;
+        useCaseGrid.appendChild(article);
+      }
+    }
+
+    function renderTab(tabName) {
+      const tab = tabContent[tabName] || tabContent.directive;
+      tabPanel.innerHTML = `
+        <h3>${escapeHtml(tab.title)}</h3>
+        <p>${escapeHtml(tab.body)}</p>
+        <div class="schema-grid">
+          ${tab.items.map(([label, value]) => `
+            <div class="schema-item">
+              <strong>${escapeHtml(label)}</strong>
+              <span>${escapeHtml(value)}</span>
+            </div>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    renderSelect();
+    renderUseCases();
+    renderTab("directive");
+    setUseCase(activeUseCase.id);
+
+    document.getElementById("runSession").addEventListener("click", runSession);
+    document.getElementById("runHero").addEventListener("click", runSession);
+    useCaseSelect.addEventListener("change", event => setUseCase(event.target.value));
+
+    document.querySelectorAll(".filter").forEach(button => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".filter").forEach(item => item.classList.remove("active"));
+        button.classList.add("active");
+        renderUseCases(button.dataset.filter);
+      });
+    });
+
+    useCaseGrid.addEventListener("click", event => {
+      const load = event.target.closest("[data-load]");
+      const brief = event.target.closest("[data-brief]");
+      if (load) {
+        setUseCase(load.dataset.load);
+        document.querySelector(".simulator").scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+      if (brief) {
+        document.getElementById("brief").value = "Pilot focus: " + brief.dataset.brief + "\n\nSuccess criterion: show scoped intent, private inputs hidden, minimal result, and evidence bundle.";
+        document.getElementById("pilot").scrollIntoView({ behavior: "smooth" });
+      }
+    });
+
+    document.querySelectorAll(".tab").forEach(button => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".tab").forEach(item => item.classList.remove("active"));
+        button.classList.add("active");
+        renderTab(button.dataset.tab);
+      });
+    });
+
+    const form = document.getElementById("pilotForm");
+    const formStatus = document.getElementById("formStatus");
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      data.selected_use_case = activeUseCase.title;
+      data.created_at = new Date().toISOString();
+      data.static_wireframe = true;
+      savedBrief = data;
+      localStorage.setItem("ap3SilentPossiblePilotBrief", JSON.stringify(data, null, 2));
+      formStatus.textContent = "Local pilot brief saved.";
+    });
+
+    document.getElementById("downloadBrief").addEventListener("click", () => {
+      const data = savedBrief || JSON.parse(localStorage.getItem("ap3SilentPossiblePilotBrief") || "null");
+      if (!data) {
+        formStatus.textContent = "Save a local brief first.";
+        return;
+      }
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = "ap3-pilot-brief.json";
+      document.body.appendChild(anchor);
+      anchor.click();
+      anchor.remove();
+      URL.revokeObjectURL(url);
+    });
+  </script>
+</body>
+</html>
