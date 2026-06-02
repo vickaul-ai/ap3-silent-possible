@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Replace base URL with your Vercel production domain after first deploy. See docs/DEPLOYMENT.md -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://ap3-silent-possible.vercel.app/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url><loc>https://ap3-silent-possible.vercel.app/?case=quiet-quorum</loc></url>
+  <url><loc>https://ap3-silent-possible.vercel.app/?case=couplet</loc></url>
+  <url><loc>https://ap3-silent-possible.vercel.app/?case=eldercare</loc></url>
+  <url><loc>https://ap3-silent-possible.vercel.app/?case=personal-admin</loc></url>
+  <url><loc>https://ap3-silent-possible.vercel.app/?case=diligence</loc></url>
+  <url><loc>https://ap3-silent-possible.vercel.app/?case=fraud-psi</loc></url>
+  <url><loc>https://ap3-silent-possible.vercel.app/?case=sanctions-pep</loc></url>
+  <url><loc>https://ap3-silent-possible.vercel.app/?case=open-finance-consent</loc></url>
+  <url><loc>https://ap3-silent-possible.vercel.app/?case=cross-border-compliance</loc></url>
+  <url><loc>https://ap3-silent-possible.vercel.app/?case=community</loc></url>
+  <url><loc>https://ap3-silent-possible.vercel.app/?case=hermes-skill</loc></url>
+  <url><loc>https://ap3-silent-possible.vercel.app/?case=calendar-match</loc></url>
+  <url><loc>https://ap3-silent-possible.vercel.app/?case=skill-overlap</loc></url>
+  <url><loc>https://ap3-silent-possible.vercel.app/?case=introducer-dedup</loc></url>
+  <url><loc>https://ap3-silent-possible.vercel.app/?case=chore-quorum</loc></url>
+</urlset>

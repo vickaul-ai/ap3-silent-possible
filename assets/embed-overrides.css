@@ -1,0 +1,11 @@
+/**
+ * Silence Laboratories brand overrides for embedded AP3 Studio.
+ * Load after index.html inline styles when merging onto silencelaboratories.com.
+ *
+ * Example:
+ *   :root {
+ *     --font: "Your Corporate Font", system-ui, sans-serif;
+ *     --cyan: #...;
+ *     --green: #...;
+ *   }
+ */

@@ -4,7 +4,23 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AP3 Silent Possible - Agent Privacy Use Case Studio</title>
-  <meta name="description" content="A static AP3 click-through wireframe showing privacy-preserving personal-agent and enterprise-agent use cases.">
+  <meta name="description" id="metaDescription" content="Explore AP3 privacy-preserving agent collaboration — personal agents (Hermes, OpenClaw) and enterprise scenarios. By Silence Laboratories.">
+  <meta name="theme-color" content="#0b0c10">
+  <meta name="author" content="Silence Laboratories">
+  <link rel="canonical" id="canonicalLink" href="">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Silence Laboratories">
+  <meta property="og:title" id="ogTitle" content="AP3 Silent Possible — Agent Privacy Use Case Studio">
+  <meta property="og:description" id="ogDescription" content="Long-tail agents collaborating with AP3 — product scenarios, builder kits, and Silent Compute path.">
+  <meta property="og:image" id="ogImage" content="">
+  <meta property="og:url" id="ogUrl" content="">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" id="twitterTitle" content="AP3 Silent Possible">
+  <meta name="twitter:description" id="twitterDescription" content="Privacy-preserving agent collaboration scenarios for Hermes, OpenClaw, and enterprise.">
+  <meta name="twitter:image" id="twitterImage" content="">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%230b0c10' width='32' height='32' rx='6'/%3E%3Ctext x='16' y='22' text-anchor='middle' fill='%2381f0b2' font-size='14' font-family='system-ui' font-weight='800'%3E3%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://ap3-protocol.org">
+  <link rel="preconnect" href="https://silencelaboratories.com">
   <style>
     :root {
       color-scheme: dark;
@@ -36,6 +52,54 @@
     html {
       scroll-behavior: smooth;
       scroll-padding-top: 84px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 12px;
+      z-index: 100;
+      padding: 10px 14px;
+      background: var(--ink);
+      color: var(--bg);
+      border-radius: 8px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .skip-link:focus {
+      left: 12px;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 2px;
+    }
+
+    body.embed-mode .nav-links a:not(.nav-action) {
+      display: none;
+    }
+
+    body.embed-mode .brand-name small {
+      display: none;
+    }
+
+    .challenge-panel {
+      border: 1px solid rgba(129, 240, 178, .28);
+      border-radius: 8px;
+      background: rgba(129, 240, 178, .06);
+      padding: 18px;
+    }
+
+    .challenge-panel h2 {
+      margin: 0 0 10px;
+      font-size: 24px;
+    }
+
+    .challenge-panel p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
     }
 
     body {
@@ -205,6 +269,457 @@
       border-radius: 50%;
       background: var(--green);
       box-shadow: 0 0 18px rgba(129, 240, 178, .85);
+    }
+
+    .path-picker {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .path-chip {
+      min-height: 40px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .045);
+      color: var(--muted);
+      padding: 0 14px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .path-chip.active,
+    .path-chip:hover {
+      color: var(--ink);
+      border-color: rgba(102, 217, 239, .55);
+      background: rgba(102, 217, 239, .1);
+    }
+
+    .stack-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .stack-layer {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .04);
+      padding: 12px;
+    }
+
+    .stack-layer span {
+      display: block;
+      color: var(--cyan);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .stack-layer strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 15px;
+    }
+
+    .stack-layer p {
+      margin: 6px 0 0;
+      color: var(--quiet);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .callout-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .callout {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: rgba(255, 255, 255, .04);
+    }
+
+    .callout h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+    }
+
+    .callout p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .callout a {
+      color: var(--cyan);
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .cta-row .btn.external {
+      border-color: rgba(102, 217, 239, .45);
+    }
+
+    .ap3-today {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .ap3-today-item {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: rgba(129, 240, 178, .06);
+      border-color: rgba(129, 240, 178, .22);
+    }
+
+    .ap3-today-item.roadmap {
+      background: rgba(255, 210, 122, .06);
+      border-color: rgba(255, 210, 122, .22);
+    }
+
+    .ap3-today-item strong {
+      display: block;
+      font-size: 14px;
+    }
+
+    .ap3-today-item span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .op-badge {
+      min-height: 24px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 6px;
+      padding: 0 8px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+    }
+
+    .op-badge.psi {
+      color: var(--green);
+      border: 1px solid rgba(129, 240, 178, .35);
+      background: rgba(129, 240, 178, .1);
+    }
+
+    .op-badge.roadmap {
+      color: var(--amber);
+      border: 1px solid rgba(255, 210, 122, .35);
+      background: rgba(255, 210, 122, .1);
+    }
+
+    .op-badge.mixed {
+      color: var(--cyan);
+      border: 1px solid rgba(102, 217, 239, .35);
+      background: rgba(102, 217, 239, .1);
+    }
+
+    .code-foot {
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--quiet);
+    }
+
+    .code-foot a {
+      color: var(--cyan);
+    }
+
+    .usecase-top {
+      flex-wrap: wrap;
+    }
+
+    footer .footer-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    footer .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 18px;
+    }
+
+    footer .footer-links a {
+      color: var(--cyan);
+      font-size: 14px;
+    }
+
+    footer .footer-muted {
+      color: var(--quiet);
+      font-size: 13px;
+      max-width: 720px;
+    }
+
+    .discussion-prompt {
+      margin: 0;
+      padding: 10px 12px;
+      border-left: 3px solid rgba(182, 162, 255, .55);
+      background: rgba(182, 162, 255, .08);
+      color: #d8d2ff;
+      font-size: 13px;
+      font-style: italic;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .builder-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .kit-panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .04);
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .kit-panel h3 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .kit-panel p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .snippet {
+      margin: 0;
+      border: 1px solid rgba(102, 217, 239, .2);
+      border-radius: 8px;
+      background: rgba(2, 4, 8, .7);
+      color: #d9f7ff;
+      padding: 12px;
+      overflow: auto;
+      font: 11px/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      white-space: pre-wrap;
+      max-height: 220px;
+    }
+
+    .map-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .map-table th,
+    .map-table td {
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .map-table th {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, .04);
+    }
+
+    .map-table td:first-child {
+      color: var(--cyan);
+      font-weight: 700;
+    }
+
+    .discovery-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .discovery-network {
+      position: relative;
+      min-height: 320px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(14, 16, 22, .9);
+      overflow: hidden;
+    }
+
+    .net-node {
+      position: absolute;
+      width: 88px;
+      min-height: 52px;
+      border: 1px solid var(--line-strong);
+      border-radius: 8px;
+      background: rgba(25, 29, 39, .95);
+      padding: 6px 8px;
+      font-size: 11px;
+      z-index: 1;
+    }
+
+    .net-node strong {
+      display: block;
+      font-size: 11px;
+    }
+
+    .net-node span {
+      color: var(--quiet);
+      font-size: 10px;
+    }
+
+    .net-node.active {
+      border-color: rgba(129, 240, 178, .6);
+      box-shadow: 0 0 24px rgba(129, 240, 178, .2);
+    }
+
+    .net-node.n1 { left: 8%; top: 12%; }
+    .net-node.n2 { left: 38%; top: 6%; }
+    .net-node.n3 { right: 8%; top: 14%; }
+    .net-node.n4 { left: 4%; top: 42%; }
+    .net-node.n5 { left: 36%; top: 38%; }
+    .net-node.n6 { right: 6%; top: 44%; }
+    .net-node.n7 { left: 22%; bottom: 10%; }
+
+    .net-session {
+      position: absolute;
+      left: 52%;
+      top: 52%;
+      transform: translate(-50%, -50%);
+      width: 120px;
+      min-height: 48px;
+      border: 1px dashed rgba(255, 210, 122, .55);
+      border-radius: 8px;
+      background: rgba(255, 210, 122, .08);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 8px;
+      font-size: 11px;
+      color: var(--amber);
+      font-weight: 800;
+      z-index: 2;
+    }
+
+    .discovery-network:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 50% 45%, rgba(102, 217, 239, .12), transparent 55%);
+      pointer-events: none;
+    }
+
+    .enterprise-cta {
+      margin-top: 8px;
+    }
+
+    .enterprise-cta a {
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .playground-hint {
+      margin: 8px 0 0;
+      font-size: 12px;
+      color: var(--quiet);
+    }
+
+    .playground-hint a {
+      color: var(--cyan);
+    }
+
+    .debate-toggle {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .debate-toggle button {
+      flex: 1;
+      min-height: 40px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .04);
+      color: var(--muted);
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .debate-toggle button.active {
+      color: var(--ink);
+      border-color: rgba(102, 217, 239, .5);
+      background: rgba(102, 217, 239, .1);
+    }
+
+    .debate-toggle button[data-debate="without"].active {
+      border-color: rgba(255, 127, 153, .5);
+      background: rgba(255, 127, 153, .1);
+    }
+
+    .debate-panel {
+      display: none;
+      margin-top: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .debate-panel.active {
+      display: block;
+    }
+
+    .debate-panel.without {
+      border-color: rgba(255, 127, 153, .35);
+      background: rgba(255, 127, 153, .06);
+    }
+
+    .debate-panel.with {
+      border-color: rgba(129, 240, 178, .35);
+      background: rgba(129, 240, 178, .06);
+    }
+
+    .debate-panel strong {
+      color: var(--ink);
+    }
+
+    .fail-example {
+      border: 1px solid rgba(255, 127, 153, .3);
+      border-radius: 8px;
+      padding: 14px;
+      background: rgba(255, 127, 153, .06);
+    }
+
+    .fail-example h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+
+    .fail-example p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
     }
 
     .hero-grid {
@@ -957,7 +1472,8 @@
 
       .hero-grid,
       .architecture,
-      .intake {
+      .intake,
+      .builder-grid {
         grid-template-columns: 1fr;
       }
 
@@ -993,7 +1509,11 @@
       .usecase-grid,
       .schema-grid,
       .compare-grid,
-      .form-grid {
+      .form-grid,
+      .callout-grid,
+      .stack-strip,
+      .ap3-today,
+      .discovery-layout {
         grid-template-columns: 1fr;
       }
 
@@ -1068,9 +1588,10 @@
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   <nav class="nav" aria-label="Primary">
     <div class="shell nav-inner">
-      <a class="brand" href="#top" aria-label="AP3 Silent Possible home">
+      <a class="brand" href="#explore" aria-label="AP3 Silent Possible home">
         <span class="mark" aria-hidden="true"><span>AP3</span></span>
         <span class="brand-name">
           <strong>AP3 Silent Possible</strong>
@@ -1078,32 +1599,71 @@
         </span>
       </a>
       <div class="nav-links">
-        <a href="#protocol">Protocol</a>
+        <a href="#explore">Explore</a>
         <a href="#use-cases">Use cases</a>
+        <a href="#builders">Builders</a>
+        <a href="#silent-compute">Silent Compute</a>
+        <a href="#discovery">Discovery</a>
         <a href="#architecture">Architecture</a>
+        <a href="#ap3-today">AP3 today</a>
         <a href="#evidence">Evidence</a>
-        <a class="nav-action" href="#pilot">Pilot brief</a>
+        <a class="nav-action" href="https://playground.ap3-protocol.org/" target="_blank" rel="noopener" data-track-outbound="playground">Live PSI</a>
       </div>
     </div>
   </nav>
 
-  <main id="top">
-    <section class="hero shell">
-      <span class="status-pill"><span class="status-dot"></span> Static click-through - no real AP3 computation</span>
+  <main id="main">
+    <section class="hero shell" id="explore" aria-labelledby="hero-title" tabindex="-1">
+      <span class="status-pill"><span class="status-dot"></span> Static click-through — no real AP3 computation on this page</span>
       <div class="hero-grid">
         <div>
-          <h1>Design agent workflows where sensitive inputs never become shared context.</h1>
-          <p class="hero-copy"><strong>AP3</strong> is a research-preview protocol for privacy-preserving collaboration between autonomous agents. This wireframe turns the protocol into product surfaces for OpenClaw, Hermes, and enterprise agents.</p>
-          <div class="hero-actions">
-            <button class="btn primary" id="runHero" type="button">Run simulated AP3 session</button>
-            <a class="btn" href="#use-cases">Open use-case atlas</a>
+          <h1 id="hero-title">Long-tail agents can collaborate without leaking what they know.</h1>
+          <p class="hero-copy">Millions of niche personal agents — on <strong>Hermes</strong>, <strong>OpenClaw</strong>, or your own stack — will never share one vendor. <strong>AP3</strong> (Agent Privacy-Preserving Protocol) is the open layer for approved private operations between agents. This studio turns AP3 into product stories; <a href="https://playground.ap3-protocol.org/" target="_blank" rel="noopener">the Playground</a> runs real PSI.</p>
+          <div class="path-picker" role="toolbar" aria-label="Choose your journey">
+            <button class="path-chip active" type="button" data-path="explore">Explore scenarios</button>
+            <button class="path-chip" type="button" data-path="builder">I'm building agents</button>
+            <button class="path-chip" type="button" data-path="enterprise">Enterprise / regulated</button>
+          </div>
+          <div class="stack-strip" aria-label="Technology stack">
+            <div class="stack-layer">
+              <span>Layer 1</span>
+              <strong>Hermes / OpenClaw / your agent</strong>
+              <p>Local memory, skills, and owner policy. Private inputs stay on device until approved.</p>
+            </div>
+            <div class="stack-layer">
+              <span>Layer 2</span>
+              <strong>AP3 on A2A</strong>
+              <p>AgentCards, roles, signed directives, private operations, minimal results, evidence.</p>
+            </div>
+            <div class="stack-layer">
+              <span>Layer 3</span>
+              <strong>Silent Compute</strong>
+              <p>MPC/PET execution at scale — purpose-bound, auditable collaboration for production.</p>
+            </div>
+          </div>
+          <div class="cta-row">
+            <button class="btn primary" id="runHero" type="button">Run simulated session</button>
+            <a class="btn external" href="https://playground.ap3-protocol.org/" target="_blank" rel="noopener" data-track-outbound="playground">Try live PSI</a>
+            <a class="btn external" href="https://github.com/lfdt-ap3/ap3" target="_blank" rel="noopener" data-track-outbound="github">AP3 on GitHub</a>
+            <a class="btn external" href="https://silencelaboratories.com/silent-compute" target="_blank" rel="noopener" data-track-outbound="silent_compute">Silent Compute</a>
+            <a class="btn" href="#use-cases">Use-case atlas</a>
+          </div>
+          <div class="callout-grid">
+            <div class="callout">
+              <h3>This studio (wireframe)</h3>
+              <p>Product narratives, simulated envelopes, and workshop prompts. No cryptography runs here.</p>
+            </div>
+            <div class="callout">
+              <h3><a href="https://playground.ap3-protocol.org/" target="_blank" rel="noopener">AP3 Playground</a></h3>
+              <p>Live PSI over A2A, compatibility lab, tamper demos, and protocol inspector. Use it to validate the real protocol.</p>
+            </div>
           </div>
           <div class="protocol-stage" id="protocol">
-            <div class="stage-chip"><span>01</span><strong>Discover</strong><small>AgentCards, roles, commitments</small></div>
-            <div class="stage-chip"><span>02</span><strong>Authorize</strong><small>Signed intent and scope</small></div>
-            <div class="stage-chip"><span>03</span><strong>Compute</strong><small>PSI, threshold, scoring</small></div>
-            <div class="stage-chip"><span>04</span><strong>Reveal</strong><small>Minimal result only</small></div>
-            <div class="stage-chip"><span>05</span><strong>Evidence</strong><small>Signed receipt and audit trail</small></div>
+            <div class="stage-chip"><span>01</span><strong>Discover</strong><small>AgentCards + AP3 extension</small></div>
+            <div class="stage-chip"><span>02</span><strong>Compatibility</strong><small>Roles, ops, commitments</small></div>
+            <div class="stage-chip"><span>03</span><strong>init → msg2</strong><small>PSI wire (four envelopes)</small></div>
+            <div class="stage-chip"><span>04</span><strong>Result</strong><small>Initiator learns output</small></div>
+            <div class="stage-chip"><span>05</span><strong>Evidence</strong><small>Signed receipt + audit</small></div>
           </div>
         </div>
 
@@ -1141,6 +1701,12 @@
                 <h3 id="activeStage">Ready</h3>
                 <p id="stageCopy">Choose a use case and run the simulated protocol flow.</p>
                 <div class="progress"><span id="progressBar"></span></div>
+                <div class="debate-toggle" role="group" aria-label="Privacy comparison">
+                  <button type="button" class="active" data-debate="without">Without AP3</button>
+                  <button type="button" data-debate="with">With AP3</button>
+                </div>
+                <div class="debate-panel without active" id="debateWithout"></div>
+                <div class="debate-panel with" id="debateWith"></div>
                 <div class="metric-strip">
                   <div class="metric"><strong id="metricOne">0</strong><span>private inputs exposed</span></div>
                   <div class="metric"><strong id="metricTwo">1</strong><span>minimal output</span></div>
@@ -1151,10 +1717,32 @@
               <div class="panel">
                 <h3>Current envelope</h3>
                 <pre class="code" id="codePanel"></pre>
+                <p class="code-foot">Compare to a <a href="https://playground.ap3-protocol.org/" target="_blank" rel="noopener">live PSI run</a> in the AP3 Playground (real crypto + HTTP trace).</p>
               </div>
             </div>
           </div>
         </section>
+      </div>
+    </section>
+
+    <section class="section shell" id="ap3-today">
+      <div class="section-head">
+        <h2>What AP3 ships today</h2>
+        <p>Research preview — aligned with <a href="https://ap3-protocol.org/roadmap/" target="_blank" rel="noopener">ap3-protocol.org</a>. This wireframe may show future operations as modeled manifests.</p>
+      </div>
+      <div class="ap3-today">
+        <div class="ap3-today-item">
+          <strong>Available now</strong>
+          <span>PSI between <code>ap3_initiator</code> and <code>ap3_receiver</code>; signed commitments, PrivacyIntentDirectives, PrivacyResultDirectives; replay protection.</span>
+        </div>
+        <div class="ap3-today-item">
+          <strong>PSI semantics</strong>
+          <span>Both parties run crypto rounds; only the initiator learns the intersection or count. The receiver does not see the initiator's full query set.</span>
+        </div>
+        <div class="ap3-today-item roadmap">
+          <strong>On the roadmap</strong>
+          <span>More operations (threshold, private score, set cardinality), proof-of-computation, receiver-signed receipts, custom operation DSL.</span>
+        </div>
       </div>
     </section>
 
@@ -1178,7 +1766,7 @@
     <section class="section shell" id="use-cases">
       <div class="section-head">
         <h2>Use-case atlas</h2>
-        <p>The top five are recommended first builds. The remaining cases are included because they were discussed in the source material and help show AP3's wider product surface.</p>
+        <p id="useCaseIntro">The top five are recommended first builds. Cards marked <span class="op-badge roadmap">Roadmap</span> use operation shapes not yet in the public SDK — they are product placeholders for conversation.</p>
       </div>
       <div class="filters" role="toolbar" aria-label="Use case filters">
         <button class="filter active" data-filter="all" type="button">All</button>
@@ -1186,8 +1774,102 @@
         <button class="filter" data-filter="personal" type="button">Personal agents</button>
         <button class="filter" data-filter="enterprise" type="button">Enterprise</button>
         <button class="filter" data-filter="future" type="button">Future extension</button>
+        <button class="filter" data-filter="builder" type="button">Builder platform</button>
       </div>
       <div class="usecase-grid" id="useCaseGrid"></div>
+    </section>
+
+    <section class="section shell" id="builders">
+      <div class="section-head">
+        <h2>Build your first AP3-backed agent skill</h2>
+        <p>Starter artifacts for <strong>Hermes</strong> and <strong>OpenClaw</strong> builders. Wire these into a real flow using the <a href="https://github.com/lfdt-ap3/ap3" target="_blank" rel="noopener">AP3 SDK</a> and validate with the <a href="https://playground.ap3-protocol.org/" target="_blank" rel="noopener">Playground</a>.</p>
+      </div>
+      <div class="builder-grid">
+        <div class="kit-panel">
+          <h3>Hermes — SKILL.md stub</h3>
+          <p>Registers a silent-compute skill that opens an AP3 session before any private list enters chat context.</p>
+          <pre class="snippet" id="hermesSkillSnippet"></pre>
+          <div class="hero-actions">
+            <button class="btn primary" type="button" id="copyHermesSkill">Copy SKILL.md</button>
+          </div>
+        </div>
+        <div class="kit-panel">
+          <h3>OpenClaw — AgentCard AP3 extension</h3>
+          <p>Advertise <code>ap3_receiver</code> or <code>ap3_initiator</code> and PSI so other agents can discover you.</p>
+          <pre class="snippet" id="openClawSnippet"></pre>
+          <div class="hero-actions">
+            <button class="btn primary" type="button" id="copyOpenClawCard">Copy JSON</button>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top:14px;color:var(--quiet);font-size:13px;">Install: <code>pip install ap3</code> (research preview). Private inputs stay in agent memory until owner policy approves an AP3 session.</p>
+    </section>
+
+    <section class="section shell" id="challenge">
+      <div class="challenge-panel">
+        <h2>Builder challenge — ship one AP3 skill in 30 days</h2>
+        <p>Build a Hermes <code>SKILL.md</code> or OpenClaw AgentCard flow that runs an AP3 session (start with PSI) before private data hits shared chat. Validate in the <a href="https://playground.ap3-protocol.org/" target="_blank" rel="noopener" data-track-outbound="playground">Playground</a>, share your repo with <code>#AP3SilentPossible</code>, and open a discussion on <a href="https://github.com/lfdt-ap3/ap3" target="_blank" rel="noopener" data-track-outbound="github">GitHub</a>.</p>
+        <div class="hero-actions" style="margin-top:14px;">
+          <a class="btn primary" href="#builders">Get starter kits</a>
+          <a class="btn" href="#pilot">Save builder brief</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell" id="silent-compute">
+      <div class="section-head">
+        <h2>From AP3 story to Silent Compute</h2>
+        <p>AP3 standardizes the agent conversation. <a href="https://silencelaboratories.com/silent-compute" target="_blank" rel="noopener">Silent Compute</a> runs purpose-bound MPC/PET workloads when you need production scale, audit, and cross-institution collaboration.</p>
+      </div>
+      <div class="panel" style="overflow:auto;">
+        <table class="map-table" aria-label="AP3 operation to Silent Compute capability">
+          <thead>
+            <tr>
+              <th>AP3 / wireframe operation</th>
+              <th>Silent Compute capability</th>
+              <th>Example on this site</th>
+            </tr>
+          </thead>
+          <tbody id="silentComputeMapBody"></tbody>
+        </table>
+      </div>
+      <div class="cta-row" style="margin-top:16px;">
+        <a class="btn primary external" href="https://silencelaboratories.com/silent-compute" target="_blank" rel="noopener" data-track-outbound="book_call">Discuss Silent Compute</a>
+        <a class="btn external" href="https://silencelaboratories.com/usecases/anti-fraud" target="_blank" rel="noopener" data-track-outbound="anti_fraud">Anti-fraud consortium</a>
+        <a class="btn external" href="https://silencelaboratories.com/silent-compute" target="_blank" rel="noopener" data-track-outbound="silent_compute">Open finance</a>
+      </div>
+    </section>
+
+    <section class="section shell" id="discovery">
+      <div class="section-head">
+        <h2>Long-tail agent discovery</h2>
+        <p>Thousands of niche agents advertise AP3 capabilities. Compatibility filtering happens on <strong>AgentCards only</strong> — before any private payload moves.</p>
+      </div>
+      <div class="discovery-layout">
+        <div>
+          <ol class="bullets" style="margin:0;">
+            <li>Initiator agent scans a registry or marketplace of AgentCards.</li>
+            <li>Filter: role complement, shared <code>supported_operations</code>, commitment shape, industry tags.</li>
+            <li>Score top matches (compatibility lab — see Playground).</li>
+            <li>Open AP3 session with the chosen receiver only.</li>
+          </ol>
+          <div class="fail-example" style="margin-top:14px;">
+            <h3>When agents don't match</h3>
+            <p>If one agent advertises PIR and the other only PSI, the session stops at compatibility — no compute, no leak. Try mismatch demos in the <a href="https://playground.ap3-protocol.org/" target="_blank" rel="noopener">Playground compatibility lab</a>.</p>
+            <button class="btn" type="button" id="previewCompatFail" style="margin-top:12px;">Preview failure envelope in simulator</button>
+          </div>
+        </div>
+        <div class="discovery-network" aria-hidden="true">
+          <div class="net-node n1"><strong>Travel</strong><span>ap3_receiver</span></div>
+          <div class="net-node n2"><strong>Calendar</strong><span>PSI</span></div>
+          <div class="net-node n3"><strong>CRM</strong><span>finance</span></div>
+          <div class="net-node n4"><strong>Family</strong><span>quorum</span></div>
+          <div class="net-node n5 active"><strong>You</strong><span>ap3_initiator</span></div>
+          <div class="net-node n6"><strong>Fraud list</strong><span>blacklist</span></div>
+          <div class="net-node n7"><strong>Health</strong><span>policy lane</span></div>
+          <div class="net-session">PSI session<br>2 of 7 match</div>
+        </div>
+      </div>
     </section>
 
     <section class="section shell" id="architecture">
@@ -1269,16 +1951,33 @@
         <p>This site stores the pilot brief locally in the browser. It does not send data anywhere.</p>
       </div>
       <div class="panel">
-        <h2>Pilot brief</h2>
+        <h2>Builder / pilot brief</h2>
         <form id="pilotForm">
           <div class="form-grid">
             <div class="field">
               <label for="owner">Owner</label>
-              <input id="owner" name="owner" autocomplete="name" placeholder="Product lead">
+              <input id="owner" name="owner" autocomplete="name" placeholder="Your name or handle">
+            </div>
+            <div class="field">
+              <label for="framework">Agent framework</label>
+              <select id="framework" name="framework">
+                <option value="">Select…</option>
+                <option value="hermes">Hermes</option>
+                <option value="openclaw">OpenClaw</option>
+                <option value="other">Other</option>
+              </select>
             </div>
             <div class="field">
               <label for="track">Track</label>
               <input id="track" name="track" placeholder="Personal agents">
+            </div>
+            <div class="field">
+              <label for="repo">Repo or skill URL</label>
+              <input id="repo" name="repo" type="url" placeholder="https://github.com/you/...">
+            </div>
+            <div class="field">
+              <label for="ship">Ship target</label>
+              <input id="ship" name="ship" placeholder="e.g. 2 weeks">
             </div>
             <div class="field full">
               <label for="brief">Use-case note</label>
@@ -1288,6 +1987,7 @@
           <div class="hero-actions">
             <button class="btn primary" type="submit">Save local brief</button>
             <button class="btn" id="downloadBrief" type="button">Download JSON</button>
+            <button class="btn" id="downloadBriefMd" type="button">Download Markdown</button>
           </div>
           <div class="status" id="formStatus"></div>
         </form>
@@ -1296,16 +1996,114 @@
   </main>
 
   <footer>
-    <div class="shell">
-      AP3 references: <a href="https://ap3-protocol.org/" target="_blank" rel="noopener">overview</a>,
-      <a href="https://ap3-protocol.org/roles/" target="_blank" rel="noopener">roles</a>,
-      <a href="https://ap3-protocol.org/use-cases/monetize-with-service-provider/" target="_blank" rel="noopener">service provider flow</a>,
-      <a href="https://playground.ap3-protocol.org/" target="_blank" rel="noopener">playground</a>.
-      This is a static wireframe and does not perform cryptographic computation.
+    <div class="shell footer-grid">
+      <p class="footer-muted"><strong>AP3 Silent Possible</strong> is a product wireframe by <a href="https://silencelaboratories.com/" target="_blank" rel="noopener">Silence Laboratories</a>. AP3 is an open protocol contributed to <a href="https://lf-decentralized-trust-labs.github.io/labs/approved/ap3-protocol.html" target="_blank" rel="noopener">LF Decentralized Trust Labs</a>. Production privacy compute: <a href="https://silencelaboratories.com/silent-compute" target="_blank" rel="noopener">Silent Compute</a>. This page does not run cryptographic computation.</p>
+      <div class="footer-links">
+        <a href="https://ap3-protocol.org/" target="_blank" rel="noopener">AP3 overview</a>
+        <a href="https://ap3-protocol.org/roles/" target="_blank" rel="noopener">Roles</a>
+        <a href="https://ap3-protocol.org/functions/psi/" target="_blank" rel="noopener">PSI spec</a>
+        <a href="https://playground.ap3-protocol.org/" target="_blank" rel="noopener">Playground</a>
+        <a href="https://github.com/lfdt-ap3/ap3" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://silencelaboratories.com/silent-compute" target="_blank" rel="noopener">Silent Compute</a>
+        <a href="#pilot">Pilot brief</a>
+      </div>
     </div>
   </footer>
 
   <script>
+    const SITE_CONFIG = {
+      // Leave canonicalOrigin empty on Vercel — window.location.origin is used for OG/canonical.
+      // Set only if you add a custom production domain (see docs/DEPLOYMENT.md).
+      canonicalOrigin: "",
+      canonicalPath: "/",
+      ogImagePath: "/assets/og/default.svg"
+    };
+
+    window.dataLayer = window.dataLayer || [];
+
+    function trackEvent(name, detail = {}) {
+      const payload = { event: name, ...detail, ts: Date.now() };
+      window.dataLayer.push(payload);
+      if (localStorage.getItem("ap3AnalyticsDebug") === "1") {
+        console.info("[ap3-studio]", name, detail);
+      }
+    }
+
+    function siteOrigin() {
+      if (SITE_CONFIG.canonicalOrigin) {
+        return SITE_CONFIG.canonicalOrigin.replace(/\/$/, "");
+      }
+      return window.location.origin;
+    }
+
+    function absoluteUrl(pathAndQuery = "") {
+      const base = siteOrigin() + (SITE_CONFIG.canonicalPath || "/").replace(/\/$/, "");
+      const path = pathAndQuery.startsWith("?") ? SITE_CONFIG.canonicalPath + pathAndQuery : pathAndQuery;
+      if (pathAndQuery.startsWith("http")) return pathAndQuery;
+      if (pathAndQuery.startsWith("?")) return base + pathAndQuery;
+      if (pathAndQuery.startsWith("/")) return siteOrigin() + pathAndQuery;
+      return base + (pathAndQuery ? "/" + pathAndQuery : "");
+    }
+
+    function initSiteMeta() {
+      const ogImage = absoluteUrl(SITE_CONFIG.ogImagePath);
+      const pageUrl = window.location.href;
+      const canonical = SITE_CONFIG.canonicalOrigin
+        ? absoluteUrl(window.location.search || "")
+        : pageUrl.split("#")[0];
+      const set = (id, attr, val) => {
+        const el = document.getElementById(id);
+        if (el) el.setAttribute(attr, val);
+      };
+      set("canonicalLink", "href", canonical);
+      set("ogImage", "content", ogImage);
+      set("twitterImage", "content", ogImage);
+      set("ogUrl", "content", canonical);
+      if (new URLSearchParams(window.location.search).get("embed") === "1") {
+        document.body.classList.add("embed-mode");
+      }
+      trackEvent("studio_page_view", {
+        path: window.location.pathname,
+        case: new URLSearchParams(window.location.search).get("case"),
+        embed: document.body.classList.contains("embed-mode")
+      });
+    }
+
+    function updatePageMeta(useCase) {
+      const title = useCase
+        ? `${useCase.title} — AP3 Silent Possible`
+        : "AP3 Silent Possible — Agent Privacy Use Case Studio";
+      const description = useCase
+        ? `${useCase.summary} Explore AP3 agent privacy scenarios by Silence Laboratories.`
+        : "Explore AP3 privacy-preserving agent collaboration for Hermes, OpenClaw, and enterprise agents.";
+      document.title = title;
+      const set = (id, val) => {
+        const el = document.getElementById(id);
+        if (el) el.setAttribute("content", val);
+      };
+      set("metaDescription", description);
+      set("ogTitle", title);
+      set("ogDescription", description);
+      set("twitterTitle", title);
+      set("twitterDescription", description);
+      if (useCase) {
+        const url = caseShareUrl(useCase.id);
+        set("ogUrl", url);
+        document.getElementById("canonicalLink")?.setAttribute("href", url);
+      }
+    }
+
+    function shareTextFor(item) {
+      return [
+        "AP3 Silent Possible · " + item.title,
+        item.summary,
+        "",
+        "Explore: " + caseShareUrl(item.id),
+        "",
+        "#AP3SilentPossible · ap3-protocol.org"
+      ].join("\n");
+    }
+
     const useCases = [
       {
         id: "quiet-quorum",
@@ -1321,7 +2119,8 @@
         bullets: ["Food, media, sleep, photo and supervision norms", "Shared ground card only", "Direct-disclosure lane for allergies"],
         output: "Everyone agrees: peanut-free snacks, no firearms in home, PG max, lights out by 10:30.",
         privateInputs: "household norms, parenting preferences, safety boundaries",
-        evidence: "six signed intents, one event scope, no full norm profile transmitted"
+        evidence: "six signed intents, one event scope, no full norm profile transmitted",
+        operationBadge: "mixed"
       },
       {
         id: "couplet",
@@ -1337,7 +2136,8 @@
         bullets: ["Baby names, vacation destinations, house offers", "Simultaneous reveal", "Secure dot product as future ranking layer"],
         output: "Overlap found: Maya, Nora, Jun. Private rankings remain hidden.",
         privateInputs: "favorite names, ranked destinations, dealbreakers, weights",
-        evidence: "two signed intents, mirrored result receipts, full lists hidden"
+        evidence: "two signed intents, mirrored result receipts, full lists hidden",
+        operationBadge: "mixed"
       },
       {
         id: "eldercare",
@@ -1353,7 +2153,8 @@
         bullets: ["Facility overlap", "Care preference scoring", "Private capacity bands"],
         output: "Shared option: Sunrise North. Suggested split uses capacity bands, not raw balances.",
         privateInputs: "facility preferences, budget bands, geography, care priorities",
-        evidence: "three signed intents, scoring manifest, settlement-ready result"
+        evidence: "three signed intents, scoring manifest, settlement-ready result",
+        operationBadge: "mixed"
       },
       {
         id: "personal-admin",
@@ -1369,7 +2170,8 @@
         bullets: ["High-risk workflow manifest", "Approved fields only", "Transcript and evidence bundle"],
         output: "Prescription is ready after 4 PM. No SSN, payment card, or clinical decision used.",
         privateInputs: "patient name, approved DOB, medication name, call goal",
-        evidence: "explicit consent, allowed-field log, forbidden-action checks"
+        evidence: "explicit consent, allowed-field log, forbidden-action checks",
+        operationBadge: "roadmap"
       },
       {
         id: "diligence",
@@ -1385,23 +2187,96 @@
         bullets: ["Customer overlap", "Sanctions screening", "Restricted AI summaries"],
         output: "Overlap count: 18,420 matched customers. Raw customer files remain undisclosed.",
         privateInputs: "customer files, supplier risk data, loan records, contract exposure",
-        evidence: "function manifest, data-room policy, signed result receipt"
+        evidence: "function manifest, data-room policy, signed result receipt",
+        operationBadge: "psi",
+        silentComputeCapability: "Secure Match · Delegated Analytics",
+        debateWithout: "Buyer downloads entire data-room ZIP into local LLM context. Seller loses control; leaks are irreversible.",
+        debateWith: "Buyer agent runs manifest-approved PSI/QA. Seller sees only query receipts; buyer sees counts not raw rows."
       },
       {
         id: "fraud-psi",
-        title: "Enterprise fraud PSI",
+        title: "Privacy-preserving fraud consortium",
         rank: "P1",
+        category: ["enterprise", "top"],
+        type: "Enterprise consortium",
+        operation: "PSI",
+        initiator: "Fintech risk agent",
+        receiver: "Consortium fraud-list agent",
+        adapter: "AP3 service-provider lane",
+        summary: "Industry peers detect overlapping fraud signals in a consortium model — without centralizing raw customer lists or exposing competitive intelligence.",
+        bullets: ["Hashed identifiers across members", "MPC-backed Secure Match at scale", "Aligns with anti-fraud consortium patterns", "Minimal intersection count + policy withholding"],
+        output: "Intersection count: 37. Matched IDs withheld by consortium policy.",
+        privateInputs: "fraud lists, customer identifiers, risk corpus",
+        evidence: "receiver commitment, intent validation, result directive, consortium audit log",
+        operationBadge: "psi",
+        silentComputeCapability: "Secure Match",
+        discussionPrompt: "Would your institution join a fraud network if no member ever saw another member's full list?",
+        debateWithout: "Risk teams export full fraud CSVs into a shared Slack bot or vendor bucket. Lists leak, stale copies spread, and regulators ask who touched raw PII.",
+        debateWith: "Each member's agent runs AP3 PSI. Only the initiator learns a count; evidence proves purpose and policy. Silent Compute operates the MPC layer in production."
+      },
+      {
+        id: "sanctions-pep",
+        title: "Sanctions / PEP screen",
+        rank: "E2",
         category: ["enterprise"],
         type: "Enterprise agents",
         operation: "PSI",
-        initiator: "Fintech risk agent",
-        receiver: "Fraud-list provider",
-        adapter: "AP3 service-provider lane",
-        summary: "Two organizations check overlapping fraud signals without revealing full lists.",
-        bullets: ["Hashed customer lists", "Compliance approval", "Minimal intersection output"],
-        output: "Intersection count: 37. Matched IDs are withheld by policy.",
-        privateInputs: "fraud lists, customer identifiers, risk corpus",
-        evidence: "receiver commitment, intent validation, result directive"
+        initiator: "Bank onboarding agent",
+        receiver: "Sanctions list agent",
+        adapter: "AP3 PSI lane",
+        summary: "Check whether a new customer appears on a counterparty sanctions list — without sending customer identity to the list holder or exporting the full list.",
+        bullets: ["Same story as AP3 Playground bank demo", "Initiator learns boolean or count only", "Receiver never sees full customer roster"],
+        output: "Screen result: no intersection on sanctions list v2026-Q2.",
+        privateInputs: "customer identity tokens, onboarding packet",
+        evidence: "signed intent, compatibility check, result receipt",
+        operationBadge: "psi",
+        silentComputeCapability: "Secure Match",
+        playgroundLink: true,
+        discussionPrompt: "Can your onboarding agent ask 'is this customer sanctioned?' without becoming a data exporter?",
+        debateWithout: "Bank A emails customer details to Bank B's compliance team or uploads to a shared screening portal — creating concentration and breach risk.",
+        debateWith: "Bank A's agent runs PSI with Bank B's list agent. Customer record never leaves Bank A's trust domain; list never leaves Bank B."
+      },
+      {
+        id: "open-finance-consent",
+        title: "Open finance consent match",
+        rank: "E3",
+        category: ["enterprise"],
+        type: "Open finance",
+        operation: "PSI",
+        initiator: "Aggregator agent",
+        receiver: "Provider agents",
+        adapter: "AP3 PSI lane",
+        summary: "Match consented customer insights across providers without pooling raw transaction files into one datastore.",
+        bullets: ["Consent-bound tags only", "Secure Match across vaults", "Purpose limitation at compute layer"],
+        output: "Eligible overlap: 12,400 consented accounts for stated product. Raw statements not merged.",
+        privateInputs: "transaction tags, consent grants, product eligibility rules",
+        evidence: "consent manifest, PSI receipt, provider policy hashes",
+        operationBadge: "psi",
+        silentComputeCapability: "Secure Match · Open Finance",
+        discussionPrompt: "Can open finance work if every aggregator copies full statements 'just in case'?",
+        debateWithout: "Aggregator stores duplicate copies of all provider feeds. One breach exposes the entire financial picture.",
+        debateWith: "Providers keep data at source. AP3 PSI returns only the consented overlap metric; Silent Compute enforces the approved function."
+      },
+      {
+        id: "cross-border-compliance",
+        title: "Cross-border compliance screen",
+        rank: "E4",
+        category: ["enterprise", "future"],
+        type: "Cross-border",
+        operation: "PSI + policy (roadmap)",
+        initiator: "Correspondent bank agent",
+        receiver: "Jurisdiction compliance agent",
+        adapter: "AP3 compliance lane",
+        summary: "Screen cross-border parties against jurisdiction rules without shipping full KYC packets across borders.",
+        bullets: ["Data localization friendly", "Modeled policy operation", "BIS / Mandala-style MPC narrative"],
+        output: "Compliance pass: 1 policy match, 0 sanctions intersection. KYC bundle not transmitted.",
+        privateInputs: "KYC attributes, corridor rules, sanctions tags",
+        evidence: "policy manifest, jurisdiction log, signed minimal result",
+        operationBadge: "mixed",
+        silentComputeCapability: "Cross-border Collaboration",
+        discussionPrompt: "How do agents cooperate across borders when raw KYC cannot leave the country?",
+        debateWithout: "Banks email full KYC ZIPs to correspondents. Localization rules break; audit trails fragment.",
+        debateWith: "Agents exchange directives and PSI results only. Silent Compute runs localization-compliant MPC where needed."
       },
       {
         id: "community",
@@ -1417,53 +2292,222 @@
         bullets: ["Minimum thresholds", "Short expiry", "No individual attribution"],
         output: "Threshold met: four households can lend ladders this weekend.",
         privateInputs: "household observations, tool availability, contractor experiences",
-        evidence: "threshold rule, query budget, attribution-suppression log"
+        evidence: "threshold rule, query budget, attribution-suppression log",
+        operationBadge: "roadmap"
       },
       {
         id: "hermes-skill",
         title: "Hermes silent-compute skill",
-        rank: "Platform",
-        category: ["enterprise", "future"],
+        rank: "B1",
+        category: ["builder", "enterprise", "future"],
         type: "Agent platform",
         operation: "Manifest registry",
         initiator: "Hermes agent",
         receiver: "Silent-compute provider",
         adapter: "AP3 extension layer",
-        summary: "A reusable AP3 skill for session orchestration, identity, policy, mandates, attestations and evidence.",
-        bullets: ["Function manifests", "Enterprise gateway", "Audit evidence"],
+        summary: "A reusable AP3 skill for session orchestration, identity, policy, mandates, attestations and evidence — the integration point Hermes builders ship first.",
+        bullets: ["Function manifests", "Gateway + policy bindings", "Evidence bundle for every session", "Composable with SKILL.md / agentskills.io"],
         output: "Registered function: customer_overlap_psi@0.3 with policy and attestation placeholders.",
         privateInputs: "enterprise datasets, policy bindings, mandate metadata",
-        evidence: "manifest version, gateway log, simulated attestation"
+        evidence: "manifest version, gateway log, simulated attestation",
+        operationBadge: "roadmap",
+        discussionPrompt: "Could your Hermes agent register AP3 manifests instead of pasting sensitive lists into Telegram?"
+      },
+      {
+        id: "calendar-match",
+        title: "Calendar soft-match",
+        rank: "B2",
+        category: ["builder", "personal"],
+        type: "Personal agents",
+        operation: "PSI (availability tags)",
+        initiator: "Scheduler agent",
+        receiver: "Invitee agents",
+        adapter: "AP3 PSI lane",
+        summary: "Find mutual meeting slots without uploading full calendars to a shared thread.",
+        bullets: ["Hashed availability windows", "Timezone-safe tags", "Minimal overlap windows only"],
+        output: "Shared windows: Tue 4–6 PM, Thu 9–11 AM. Full calendars never exported.",
+        privateInputs: "full calendar events, travel blocks, focus time rules",
+        evidence: "signed intents, window count, no event titles transmitted",
+        operationBadge: "psi",
+        discussionPrompt: "Would you let two messaging agents find a meeting time without either owner seeing the other's full schedule?"
+      },
+      {
+        id: "skill-overlap",
+        title: "Skill overlap check",
+        rank: "B3",
+        category: ["builder", "personal"],
+        type: "Personal agents",
+        operation: "PSI",
+        initiator: "Hermes agent A",
+        receiver: "Hermes agent B",
+        adapter: "AP3 PSI lane",
+        summary: "Discover shared automations or skill IDs before collaborating — without publishing entire SKILL.md libraries.",
+        bullets: ["Skill ID intersection", "agentskills.io compatible", "No skill body leakage"],
+        output: "Overlap: inbox-triage, travel-rebooking. Full skill documents remain local.",
+        privateInputs: "skill library paths, SKILL.md contents, usage metadata",
+        evidence: "two signed intents, overlap list, libraries not transferred",
+        operationBadge: "psi",
+        discussionPrompt: "Should agents compare capability manifests before they compare chat history?"
+      },
+      {
+        id: "introducer-dedup",
+        title: "Introducer dedup",
+        rank: "B4",
+        category: ["builder", "personal"],
+        type: "Creator / solopreneur",
+        operation: "PSI",
+        initiator: "Outreach agent",
+        receiver: "CRM peer agent",
+        adapter: "AP3 PSI lane",
+        summary: "Check whether a lead is already in a partner pipeline before a warm intro — without sharing full CRM exports.",
+        bullets: ["Hashed lead identifiers", "Consent-scoped intro", "Spam reduction"],
+        output: "Match: 1 existing relationship. CRM rows not exchanged.",
+        privateInputs: "CRM contacts, pipeline stages, intro history",
+        evidence: "match count, policy log, no raw CRM dump",
+        operationBadge: "psi",
+        discussionPrompt: "Can creator agents coordinate intros without exposing their full client lists?"
+      },
+      {
+        id: "chore-quorum",
+        title: "Roommate chore quorum",
+        rank: "B5",
+        category: ["builder", "personal"],
+        type: "Personal agents",
+        operation: "PSI / quorum",
+        initiator: "Household coordinator",
+        receiver: "Roommate agents",
+        adapter: "AP3 PSI lane",
+        summary: "Align on shared chores and supply runs without revealing individual laziness scores or private notes.",
+        bullets: ["Shared task overlap", "Low-stakes viral demo", "Direct disclosure for allergies only"],
+        output: "Agreed: trash Tue/Thu, groceries Sun, no bleach products.",
+        privateInputs: "task preferences, availability, private complaints",
+        evidence: "four signed intents, quorum scope, no individual ranking leaked",
+        operationBadge: "mixed",
+        discussionPrompt: "Is this the sleepover demo for roommates — same privacy story, smaller stakes?"
       }
     ];
+
+    const hermesSkillStub = `---
+name: ap3-silent-compute
+description: Open AP3 sessions before private data enters shared agent context.
+---
+
+# AP3 silent compute (wireframe stub)
+
+When a task requires comparing private lists, preferences, or identifiers:
+
+1. Discover peer AgentCard (roles, supported_operations, commitments).
+2. Sign PrivacyIntentDirective with purpose, expiry, allowed_output.
+3. Run PSI via AP3 SDK — **do not** paste raw lists into chat.
+4. Attach evidence bundle to the user transcript.
+
+## Operations (today)
+- PSI only (research preview)
+
+## Disclaimer
+This SKILL.md is a product stub. Implement with https://github.com/lfdt-ap3/ap3
+and validate at https://playground.ap3-protocol.org/
+`;
+
+    const openClawCardStub = JSON.stringify({
+      name: "My Personal Agent",
+      ap3_extension: {
+        uri: "https://github.com/lfdt-ap3/ap3",
+        params: {
+          roles: ["ap3_receiver"],
+          supported_operations: ["PSI"],
+          commitments: [{
+            data_structure: "preference_tags",
+            data_freshness: "real_time",
+            note: "Wireframe example — sign real commitments in production"
+          }]
+        }
+      }
+    }, null, 2);
 
     const steps = [
       {
         label: "Discovery",
-        copy: "Agents read AgentCards and AP3 extension metadata before any private input crosses the wire.",
-        progress: 20
+        copy: "Agents read AgentCards and AP3 extension metadata (roles, supported_operations, commitments) before private input.",
+        progress: 15,
+        wire_phase: null
       },
       {
         label: "Compatibility",
-        copy: "Roles, supported operations and commitment shapes are checked against the selected use case.",
-        progress: 40
+        copy: "Pre-flight: ap3_initiator + ap3_receiver, shared PSI, commitment shape match. No payloads yet.",
+        progress: 30,
+        wire_phase: null
       },
       {
-        label: "PrivacyIntentDirective",
-        copy: "The initiator signs purpose, participants, expiry, replay nonce, operation and payload binding.",
-        progress: 60
+        label: "init",
+        copy: "Initiator opens session (init envelope) with signed PrivacyIntentDirective bound to payload.",
+        progress: 45,
+        wire_phase: "init"
       },
       {
-        label: "Private operation",
-        copy: "The simulated operation runs over committed private inputs and produces only the allowed result.",
-        progress: 82
+        label: "msg0 / msg1",
+        copy: "Contributory session_id via commit-then-reveal; initiator sends msg1 with query commitment.",
+        progress: 65,
+        wire_phase: "msg0_msg1"
+      },
+      {
+        label: "msg2",
+        copy: "Receiver runs PSI against its private set; returns msg2. Receiver does not learn initiator's full query.",
+        progress: 82,
+        wire_phase: "msg2"
       },
       {
         label: "PrivacyResultDirective",
-        copy: "The result is signed, logged and attached to an evidence bundle for the user or auditor.",
-        progress: 100
+        copy: "Initiator learns minimal result locally, signs PrivacyResultDirective, attaches evidence. PSI: only initiator learns output.",
+        progress: 100,
+        wire_phase: "result"
       }
     ];
+
+    const pathConfig = {
+      explore: {
+        filter: "all",
+        intro: "The top five are recommended first builds. Cards marked Roadmap use operation shapes not yet in the public SDK."
+      },
+      builder: {
+        filter: "builder",
+        intro: "Builder-first scenarios and platform skills for Hermes and OpenClaw — ship AP3 before you leak memory into messaging surfaces.",
+        includePersonal: true
+      },
+      enterprise: {
+        filter: "enterprise",
+        intro: "Regulated and cross-org scenarios — PSI today; Silent Compute for production MPC at scale.",
+        scrollTarget: "#silent-compute"
+      }
+    };
+
+    const SILENT_COMPUTE_BOOK = "https://silencelaboratories.com/silent-compute";
+
+    const silentComputeMap = [
+      ["PSI (shipped)", "Secure Match", "Fraud consortium, sanctions, open finance, diligence"],
+      ["Threshold reveal (roadmap)", "Secure Statistics / quorum constructs", "Neighborhood mutual aid, chore quorum"],
+      ["Private score (roadmap)", "Secure Statistics", "Eldercare cost split"],
+      ["Scoped workflow (roadmap)", "Delegated Analytics", "Personal admin proxy"],
+      ["Private QA / ML (roadmap)", "Secure ML · Delegated Analytics", "Confidential diligence summaries"],
+      ["Manifest registry", "Purpose-bound gateway + audit", "Hermes silent-compute skill"]
+    ];
+
+    const defaultDebate = {
+      without: "Agents paste full lists, calendars, or CRM exports into a group chat. Everyone sees everything; retention is unclear.",
+      with: "Agents run an approved AP3 operation. Only the minimal result crosses parties; evidence records what was allowed."
+    };
+
+    const operationBadgeLabels = {
+      psi: ["PSI", "psi"],
+      roadmap: ["Roadmap", "roadmap"],
+      mixed: ["PSI + roadmap", "mixed"]
+    };
+
+    function supportedOperationsFor(useCase) {
+      const op = useCase.operation.toUpperCase();
+      if (op.includes("PSI")) return ["PSI"];
+      return ["PSI"];
+    }
 
     const tabContent = {
       directive: {
@@ -1530,13 +2574,21 @@
 
     function envelopeFor(useCase, stepIndex) {
       const step = steps[stepIndex] || steps[0];
-      return {
+      const complete = stepIndex >= steps.length - 1;
+      const envelope = {
         ap3_wireframe: true,
-        session_id: "demo_" + useCase.id.replaceAll("-", "_"),
+        wireframe_version: "1.1",
+        session_id: step.wire_phase ? "pending_H(sid_0, sid_1)" : "not_started",
         stage: step.label,
+        wire_phase: step.wire_phase,
         operation: useCase.operation,
-        initiator: useCase.initiator,
-        receiver: useCase.receiver,
+        supported_operations: supportedOperationsFor(useCase),
+        roles: {
+          initiator: "ap3_initiator",
+          receiver: "ap3_receiver"
+        },
+        initiator_agent: useCase.initiator,
+        receiver_agent: useCase.receiver,
         intent: {
           purpose: useCase.id,
           expiry: "15 minutes",
@@ -1544,9 +2596,13 @@
           allowed_output: useCase.output
         },
         private_inputs_stay_hidden: useCase.privateInputs,
-        visible_result: stepIndex >= 4 ? useCase.output : "pending",
-        evidence: stepIndex >= 4 ? useCase.evidence : "collecting checks"
+        visible_result: complete ? useCase.output : "pending",
+        evidence: complete ? useCase.evidence : "collecting checks"
       };
+      if (complete) {
+        envelope.psi_note = "Only ap3_initiator learns the intersection or count; receiver does not learn initiator query set.";
+      }
+      return envelope;
     }
 
     function renderCode(stepIndex = 0) {
@@ -1571,10 +2627,21 @@
       progressBar.style.width = "0%";
       mesh.classList.remove("running");
       renderCode(0);
+      renderDebatePanels(activeUseCase);
+      updateDebateMetrics();
+      updatePageMeta(activeUseCase);
+      trackEvent("studio_case_load", { case_id: activeUseCase.id, case_title: activeUseCase.title });
+    }
+
+    function updateDebateMetrics() {
+      const withoutActive = document.querySelector('.debate-toggle button[data-debate="without"]')?.classList.contains("active");
+      document.getElementById("metricOne").textContent = withoutActive ? "all" : "0";
+      document.getElementById("metricFour").textContent = withoutActive ? "full dump" : "0";
     }
 
     function runSession() {
       clearInterval(timer);
+      trackEvent("studio_session_run", { case_id: activeUseCase.id });
       let index = 0;
       mesh.classList.add("running");
       function tick() {
@@ -1603,27 +2670,104 @@
       }
     }
 
-    function renderUseCases(filter = "all") {
+    function applyPath(pathName, scroll) {
+      const config = pathConfig[pathName] || pathConfig.explore;
+      document.querySelectorAll(".path-chip").forEach(chip => {
+        chip.classList.toggle("active", chip.dataset.path === pathName);
+      });
+      document.querySelectorAll(".filter").forEach(button => {
+        button.classList.toggle("active", button.dataset.filter === config.filter);
+      });
+      const intro = document.getElementById("useCaseIntro");
+      if (intro) {
+        intro.innerHTML = config.intro + ' Cards marked <span class="op-badge roadmap">Roadmap</span> are modeled placeholders.';
+      }
+      renderUseCases(config.filter, { includePersonal: config.includePersonal });
+      sessionStorage.setItem("ap3SilentPossiblePath", pathName);
+      trackEvent("studio_path_select", { path: pathName });
+      if (scroll) {
+        const configScroll = pathConfig[pathName]?.scrollTarget;
+        const target = configScroll
+          || (pathName === "explore" ? "#explore" : pathName === "builder" ? "#builders" : "#use-cases");
+        document.querySelector(target)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    function renderSilentComputeMap() {
+      const body = document.getElementById("silentComputeMapBody");
+      if (!body) return;
+      body.innerHTML = silentComputeMap.map(([ap3, sc, examples]) => `
+        <tr>
+          <td>${escapeHtml(ap3)}</td>
+          <td>${escapeHtml(sc)}</td>
+          <td>${escapeHtml(examples)}</td>
+        </tr>
+      `).join("");
+    }
+
+    function renderDebatePanels(useCase) {
+      const withoutEl = document.getElementById("debateWithout");
+      const withEl = document.getElementById("debateWith");
+      if (!withoutEl || !withEl) return;
+      const without = useCase.debateWithout || defaultDebate.without;
+      const withCopy = useCase.debateWith || defaultDebate.with;
+      withoutEl.innerHTML = `<strong>Leak pattern:</strong> ${escapeHtml(without)}`;
+      withEl.innerHTML = `<strong>AP3 pattern:</strong> ${escapeHtml(withCopy)}`;
+    }
+
+    function caseShareUrl(caseId) {
+      const url = new URL(window.location.href);
+      url.searchParams.set("case", caseId);
+      return url.toString();
+    }
+
+    async function copyText(text, statusEl, message) {
+      try {
+        await navigator.clipboard.writeText(text);
+        if (statusEl) statusEl.textContent = message;
+      } catch {
+        if (statusEl) statusEl.textContent = "Copy failed — select text manually.";
+      }
+    }
+
+    function isUseCaseVisible(item, filter, opts = {}) {
+      if (filter === "all") return true;
+      if (filter === "builder" && opts.includePersonal) {
+        return item.category.includes("builder") || item.category.includes("personal");
+      }
+      return item.category.includes(filter);
+    }
+
+    function renderUseCases(filter = "all", opts = {}) {
       useCaseGrid.replaceChildren();
       for (const item of useCases) {
-        const visible = filter === "all" || item.category.includes(filter);
+        const visible = isUseCaseVisible(item, filter, opts);
+        const badge = operationBadgeLabels[item.operationBadge] || operationBadgeLabels.psi;
         const article = document.createElement("article");
         article.className = "usecase-card";
+        article.id = "case-" + item.id;
         article.hidden = !visible;
         article.innerHTML = `
           <div class="usecase-top">
             <span class="rank">${escapeHtml(item.rank)}</span>
+            <span class="op-badge ${escapeHtml(badge[1])}">${escapeHtml(badge[0])}</span>
             <span class="tag">${escapeHtml(item.type)}</span>
           </div>
           <div class="usecase-body">
             <h3>${escapeHtml(item.title)}</h3>
             <p>${escapeHtml(item.summary)}</p>
+            ${item.discussionPrompt ? `<p class="discussion-prompt">${escapeHtml(item.discussionPrompt)}</p>` : ""}
             <ul class="bullets">
               ${item.bullets.map(bullet => `<li>${escapeHtml(bullet)}</li>`).join("")}
             </ul>
             <p><strong>Visible output:</strong> ${escapeHtml(item.output)}</p>
+            ${item.silentComputeCapability ? `<p class="playground-hint"><strong>Silent Compute:</strong> ${escapeHtml(item.silentComputeCapability)}</p>` : ""}
+            ${item.playgroundLink ? `<p class="playground-hint">See the <a href="https://playground.ap3-protocol.org/" target="_blank" rel="noopener">live bank sanctions demo</a> in the Playground.</p>` : ""}
+            ${item.category.includes("enterprise") ? `<p class="enterprise-cta"><a href="${SILENT_COMPUTE_BOOK}" target="_blank" rel="noopener">Discuss Silent Compute →</a></p>` : ""}
             <div class="usecase-actions">
               <button class="small-btn" type="button" data-load="${escapeHtml(item.id)}">Load simulator</button>
+              <button class="small-btn" type="button" data-copy="${escapeHtml(item.id)}">Copy link</button>
+              <button class="small-btn" type="button" data-share="${escapeHtml(item.id)}">Copy share text</button>
               <button class="small-btn" type="button" data-brief="${escapeHtml(item.title)}">Use in brief</button>
             </div>
           </div>
@@ -1648,10 +2792,55 @@
       `;
     }
 
+    function initFromQuery() {
+      const params = new URLSearchParams(window.location.search);
+      const caseId = params.get("case");
+      if (caseId && useCases.some(item => item.id === caseId)) {
+        setUseCase(caseId);
+      }
+      const savedPath = sessionStorage.getItem("ap3SilentPossiblePath");
+      if (savedPath && pathConfig[savedPath]) {
+        applyPath(savedPath, false);
+      }
+    }
+
+    initSiteMeta();
     renderSelect();
     renderUseCases();
+    renderSilentComputeMap();
     renderTab("directive");
     setUseCase(activeUseCase.id);
+    initFromQuery();
+    if (!new URLSearchParams(window.location.search).get("case")) {
+      updatePageMeta(null);
+    }
+
+    document.querySelectorAll("[data-track-outbound]").forEach(link => {
+      link.addEventListener("click", () => {
+        trackEvent("studio_outbound_click", { destination: link.dataset.trackOutbound });
+      });
+    });
+
+    document.querySelectorAll(".debate-toggle button").forEach(button => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".debate-toggle button").forEach(b => b.classList.remove("active"));
+        button.classList.add("active");
+        const mode = button.dataset.debate;
+        document.getElementById("debateWithout").classList.toggle("active", mode === "without");
+        document.getElementById("debateWith").classList.toggle("active", mode === "with");
+        updateDebateMetrics();
+        trackEvent("studio_debate_toggle", { mode, case_id: activeUseCase.id });
+      });
+    });
+
+    document.querySelectorAll(".path-chip").forEach(button => {
+      button.setAttribute("aria-pressed", button.classList.contains("active") ? "true" : "false");
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".path-chip").forEach(chip => chip.setAttribute("aria-pressed", "false"));
+        button.setAttribute("aria-pressed", "true");
+        applyPath(button.dataset.path, true);
+      });
+    });
 
     document.getElementById("runSession").addEventListener("click", runSession);
     document.getElementById("runHero").addEventListener("click", runSession);
@@ -1659,17 +2848,75 @@
 
     document.querySelectorAll(".filter").forEach(button => {
       button.addEventListener("click", () => {
-        document.querySelectorAll(".filter").forEach(item => item.classList.remove("active"));
+        document.querySelectorAll(".filter").forEach(item => {
+          item.classList.remove("active");
+          item.setAttribute("aria-pressed", "false");
+        });
         button.classList.add("active");
-        renderUseCases(button.dataset.filter);
+        button.setAttribute("aria-pressed", "true");
+        trackEvent("studio_filter_select", { filter: button.dataset.filter });
+        renderUseCases(button.dataset.filter, {});
       });
+    });
+    document.querySelector(".filter.active")?.setAttribute("aria-pressed", "true");
+
+    const form = document.getElementById("pilotForm");
+    const formStatus = document.getElementById("formStatus");
+
+    document.getElementById("hermesSkillSnippet").textContent = hermesSkillStub;
+    document.getElementById("openClawSnippet").textContent = openClawCardStub;
+    document.getElementById("copyHermesSkill").addEventListener("click", () => {
+      copyText(hermesSkillStub, formStatus, "Hermes SKILL.md copied.");
+      trackEvent("studio_copy_hermes_skill");
+    });
+    document.getElementById("copyOpenClawCard").addEventListener("click", () => {
+      copyText(openClawCardStub, formStatus, "AgentCard JSON copied.");
+      trackEvent("studio_copy_openclaw_card");
+    });
+
+    document.getElementById("previewCompatFail")?.addEventListener("click", () => {
+      activeStage.textContent = "Compatibility — failed";
+      stageCopy.textContent = "Roles or operations do not complement. Session closed before init; no private payloads exchanged.";
+      progressBar.style.width = "30%";
+      codePanel.textContent = JSON.stringify({
+        ap3_wireframe: true,
+        wireframe_version: "1.1",
+        stage: "Compatibility",
+        status: "rejected",
+        error_code: "INVALID_OPERATION",
+        detail: "Initiator requires PSI; receiver advertises PIR only",
+        initiator_roles: ["ap3_initiator"],
+        receiver_roles: ["ap3_receiver"],
+        initiator_operations: ["PSI"],
+        receiver_operations: ["PIR"],
+        private_inputs_stay_hidden: true,
+        note: "See Playground compatibility lab for live mismatch demos"
+      }, null, 2);
+      document.querySelector(".simulator")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      trackEvent("studio_compat_fail_preview");
     });
 
     useCaseGrid.addEventListener("click", event => {
       const load = event.target.closest("[data-load]");
+      const copyLink = event.target.closest("[data-copy]");
+      const shareText = event.target.closest("[data-share]");
       const brief = event.target.closest("[data-brief]");
+      if (copyLink) {
+        copyText(caseShareUrl(copyLink.dataset.copy), formStatus, "Share link copied.");
+        trackEvent("studio_copy_link", { case_id: copyLink.dataset.copy });
+      }
+      if (shareText) {
+        const item = useCases.find(u => u.id === shareText.dataset.share);
+        if (item) {
+          copyText(shareTextFor(item), formStatus, "Share text copied.");
+          trackEvent("studio_copy_share_text", { case_id: item.id });
+        }
+      }
       if (load) {
         setUseCase(load.dataset.load);
+        const url = new URL(window.location.href);
+        url.searchParams.set("case", load.dataset.load);
+        history.replaceState(null, "", url);
         document.querySelector(".simulator").scrollIntoView({ behavior: "smooth", block: "center" });
       }
       if (brief) {
@@ -1686,8 +2933,6 @@
       });
     });
 
-    const form = document.getElementById("pilotForm");
-    const formStatus = document.getElementById("formStatus");
     form.addEventListener("submit", event => {
       event.preventDefault();
       const data = Object.fromEntries(new FormData(form).entries());
@@ -1697,7 +2942,41 @@
       savedBrief = data;
       localStorage.setItem("ap3SilentPossiblePilotBrief", JSON.stringify(data, null, 2));
       formStatus.textContent = "Local pilot brief saved.";
+      trackEvent("studio_brief_save", { framework: data.framework, track: data.track });
     });
+
+    function downloadFile(filename, content, mime) {
+      const blob = new Blob([content], { type: mime });
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = filename;
+      document.body.appendChild(anchor);
+      anchor.click();
+      anchor.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function briefToMarkdown(data) {
+      return [
+        "# AP3 builder brief",
+        "",
+        `- **Owner:** ${data.owner || "—"}`,
+        `- **Framework:** ${data.framework || "—"}`,
+        `- **Track:** ${data.track || "—"}`,
+        `- **Repo:** ${data.repo || "—"}`,
+        `- **Ship target:** ${data.ship || "—"}`,
+        `- **Use case:** ${data.selected_use_case || "—"}`,
+        `- **Created:** ${data.created_at || "—"}`,
+        "",
+        "## Notes",
+        "",
+        data.brief || "—",
+        "",
+        "---",
+        "Static wireframe — https://ap3-protocol.org/ · Playground: https://playground.ap3-protocol.org/"
+      ].join("\n");
+    }
 
     document.getElementById("downloadBrief").addEventListener("click", () => {
       const data = savedBrief || JSON.parse(localStorage.getItem("ap3SilentPossiblePilotBrief") || "null");
@@ -1705,15 +2984,18 @@
         formStatus.textContent = "Save a local brief first.";
         return;
       }
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
-      const url = URL.createObjectURL(blob);
-      const anchor = document.createElement("a");
-      anchor.href = url;
-      anchor.download = "ap3-pilot-brief.json";
-      document.body.appendChild(anchor);
-      anchor.click();
-      anchor.remove();
-      URL.revokeObjectURL(url);
+      downloadFile("ap3-pilot-brief.json", JSON.stringify(data, null, 2), "application/json");
+      trackEvent("studio_brief_download", { format: "json" });
+    });
+
+    document.getElementById("downloadBriefMd").addEventListener("click", () => {
+      const data = savedBrief || JSON.parse(localStorage.getItem("ap3SilentPossiblePilotBrief") || "null");
+      if (!data) {
+        formStatus.textContent = "Save a local brief first.";
+        return;
+      }
+      downloadFile("ap3-builder-brief.md", briefToMarkdown(data), "text/markdown");
+      trackEvent("studio_brief_download", { format: "md" });
     });
   </script>
 </body>

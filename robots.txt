@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Update to your production URL after deploy (see docs/DEPLOYMENT.md)
+Sitemap: https://ap3-silent-possible.vercel.app/sitemap.xml
