@@ -875,6 +875,7 @@
         linear-gradient(180deg, rgba(255, 255, 255, .04), rgba(255, 255, 255, .02)),
         #0e1016;
       overflow: hidden;
+      isolation: isolate;
     }
 
     .mesh:before,
@@ -944,7 +945,7 @@
     }
 
     .node-c {
-      left: 260px;
+      left: clamp(222px, 36%, 300px);
       right: auto;
       top: 116px;
       bottom: auto;
@@ -954,10 +955,11 @@
     }
 
     .packet {
+      --packet-w: clamp(70px, 15%, 86px);
       position: absolute;
       z-index: 3;
-      width: 86px;
-      min-height: 36px;
+      width: var(--packet-w);
+      min-height: 34px;
       border: 1px solid rgba(102, 217, 239, .58);
       border-radius: 8px;
       background: rgba(102, 217, 239, .11);
@@ -970,21 +972,22 @@
     }
 
     .packet.intent {
-      left: 48%;
+      right: 26px;
       top: 72px;
     }
 
     .packet.compute {
-      right: 32%;
-      top: 146px;
+      right: calc(26px + var(--packet-w) + 10px);
+      top: 214px;
       border-color: rgba(129, 240, 178, .55);
       background: rgba(129, 240, 178, .11);
       color: var(--green);
     }
 
     .packet.result {
-      left: 58%;
-      bottom: 118px;
+      right: 26px;
+      top: 214px;
+      bottom: auto;
       border-color: rgba(255, 210, 122, .55);
       background: rgba(255, 210, 122, .12);
       color: var(--amber);
@@ -1051,14 +1054,17 @@
     .code {
       margin-top: 12px;
       min-height: 154px;
+      max-width: 100%;
       border: 1px solid rgba(102, 217, 239, .2);
       border-radius: 8px;
       background: rgba(2, 4, 8, .7);
       color: #d9f7ff;
       padding: 12px;
-      overflow: auto;
+      overflow: hidden;
       font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      white-space: pre;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .metric-strip {
@@ -1559,6 +1565,7 @@
 
       .packet.intent {
         left: 32px;
+        right: auto;
         top: 106px;
       }
 
@@ -1569,6 +1576,8 @@
 
       .packet.result {
         left: 32px;
+        right: auto;
+        top: auto;
         bottom: 24px;
       }
     }
