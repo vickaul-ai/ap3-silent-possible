@@ -23,6 +23,7 @@ This is not a real AP3 implementation. It is a developer/product explainer that 
 
 | Document | Purpose |
 |----------|---------|
+| [docs/SHARE-BRIEF.md](docs/SHARE-BRIEF.md) | User-facing brief to send with the live website link |
 | [docs/PRODUCT-BRIEF.md](docs/PRODUCT-BRIEF.md) | Purpose, design principles, priorities, vocabulary, how to extend |
 | [docs/IMPLEMENTATION-PLAN.md](docs/IMPLEMENTATION-PLAN.md) | Phased roadmap (Phases 0–5) with acceptance criteria |
 | [docs/TODO.md](docs/TODO.md) | Master checklist — track delivery task-by-task |
